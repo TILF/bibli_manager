@@ -14,6 +14,11 @@
 		return $res;
 	}
 
+	/**
+	 * Récupération des information d'un adhérent en fonction de son ID
+	 * @param  [INT] 	$fkAdherent [Id le l'adhérent]
+	 * @return [ARRAY]              [Tableau associatif des données de l'adhérent]
+	 */
 	function getAdherentById($fkAdherent){
 
 		$bd = bd_connect();
@@ -25,6 +30,16 @@
 	}
 
 
+	/**
+	 * Insertion d'un nouvel adhérent
+	 * @param  [STR] $nom    [Nom de l'adhérent]
+	 * @param  [STR] $prenom [Prénom de l'adhérent]
+	 * @param  [INT] $age    [âge de l'adhérent]
+	 * @param  [INT] $tel    [Téléphone de l'adhérent]
+	 * @param  [STR] $nrue   [Numéro de rue]
+	 * @param  [INT] $zcode  [Code postal]
+	 * @param  [STR] $vi     [Ville]
+	 */
 	function insertAdherent($nom, $prenom, $age, $tel, $nrue, $zcode, $vi){
 		$bd = bd_connect();
 		$sql = "INSERT INTO adherents (Nom,Prenom,Age,Adresse,Telephone,Cotisation,dateFin,Ville, CP)
@@ -33,6 +48,17 @@
 		mysqli_close($bd);
 	}
 
+	/**
+	 * Mise à jour des données d'un adhérent
+	 * @param  [STR] $nom    		[Nom de l'adhérent]
+	 * @param  [STR] $prenom 		[Prénom de l'adhérent]
+	 * @param  [INT] $age    		[âge de l'adhérent]
+	 * @param  [INT] $tel    		[Téléphone de l'adhérent]
+	 * @param  [STR] $nrue   		[Numéro de rue]
+	 * @param  [INT] $zcode  		[Code postal]
+	 * @param  [STR] $vi     		[Ville]
+	 * @param  [INT] $fkAdhérent 	[Id de l'adhérent à modifier]
+	 */
 	function updateAdherent($nom, $prenom, $age, $tel, $nrue, $zcode, $vi, $fkAdhérent){
 		$bd = bd_connect();
 		$sql  ="UPDATE adherents 
@@ -48,6 +74,11 @@
 		mysqli_close($bd);
 	}
 
+	/**
+	 * Supression d'un adhérent par ajour d'une date de fin à la relation
+	 * @param  [STR] $date       	[Date de suppression]
+	 * @param  [INT] $fkAdhérent 	[Id de l'adhérent à supprimer]
+	 */
 	function deleteAdherent($date, $fkAdhérent){
 		$bd = bd_connect();
 		$sql = "UPDATE adherents SET dateFin = '$date'

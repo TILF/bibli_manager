@@ -11,9 +11,8 @@
 
 
 
-	// Vérification anti Hacking -> TODO a remplacer par une déconnexion propore
+	// Vérification anti Hacking -> TODO a remplacer par une déconnexion propore quand la connexion et la session sera effective
 	$_GET && $_POST && die('Tentative de Hack');
-
 
 
 	// On Regarde le bouton qui a forcé l'arrivée sur la page pour savoir quelle action réaliser
@@ -128,6 +127,7 @@
 				</div>
 			</div>
 
+			<!-------- Ajout des boutons en fonction de la situation Ajout / Modif  -------->
 			<?php if(empty($infosAdh)) : ?>
 				<div class="row justify-content-center">
 					<button input type="submit" name="valid-btn" value="inscript" class="btn btn-success">Inscrire !</button>
