@@ -1,0 +1,41 @@
+body, html{
+	height: 100%;
+	width: 100%;
+}
+
+body{
+	display: flex;
+	flex-direction: column;
+}
+
+
+/* --------------  Fonts and Colors ----------------- */
+
+
+h1{
+	color:#b56719;
+	font-size: 30px;
+	border-bottom: solid 1px #b56719;
+}
+
+h3{
+	color : #2063c7;
+}
+
+/* --------------- Blocs Page ---------------------- */
+
+#contentPage{
+	width: 100%;
+	height: 100%;
+	padding: 1em;
+}
+
+.bloc-form{
+	padding: 1em 0.5em;
+	border-top: solid 1px #c9c9c9;
+	border-bottom: solid 1px #c9c9c9;
+}
+
+.row > button{
+	margin: 0 0.5em;
+}
