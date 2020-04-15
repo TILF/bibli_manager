@@ -1,28 +1,5 @@
 <?php
 
-//require('bddacces.php');
-
-function verif($conn){
-
-	if (isset($_POST['cxn'])) {
-		$ident = stripslashes($_POST['ident']);
-		$ident = mysqli_real_escape_string($conn, $ident);
- 		$pwd = stripslashes($_POST['pwd']);
-  		$pwd = mysqli_real_escape_string($conn, $pwd);
-  			$query = "SELECT * FROM `users` WHERE ident='$ident' AND pwd='".hash('sha256', $pwd)."'";
-  			$result = mysqli_query($conn,$query) or die(mysqli_error());
-  			$rows = mysqli_num_rows($result);
-
-  	if($rows==0){
-      $_SESSION['ident'] = $ident;
-      header("Location: accueil.php");
-  	}
-  	else{
-    echo "Le nom d'utilisateur ou le mot de passe est incorrect.";
-  	}
-  }
-}
-
 function connexion(){
 
 	if (!isset($_SESSION['ident'])) {
@@ -92,7 +69,7 @@ function pageStart(){
                    ' <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>',
                   '</li>',
                   '<li class="nav-item">',
-                    '<a class="nav-link" href="#">Link</a>',
+                    '<a class="nav-link" href="./g-l.php">Livres</a>',
                   '</li>',
                   '<li class="nav-item">',
                     '<a class="nav-link" href="./insc-adh">Adhérents</a>',

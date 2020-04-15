@@ -134,8 +134,8 @@
 				</div>
 			<?php else : ?>
 				<div class="row justify-content-center">
-					<button input type="submit" name="valid-btn" value="modif" class="btn btn-info">Modifier !</button>
-					<button input type="submit" name="valid-btn" value="supp" class="btn btn-danger">Supprimer !</button>
+					<button input type="submit" name="valid-btn" value="modif" class="btn btn-info">Modifier </button>
+					<button input type="submit" name="valid-btn" value="supp" class="btn btn-danger">Supprimer </button>
 				</div>
 			<?php endif; ?>
 

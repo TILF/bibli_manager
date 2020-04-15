@@ -1,48 +1,100 @@
 <?php
+
+	ob_start('ob_gzhandler');
 	session_start();
+
+	include_once('fct.php');
+	include_once('bddacces.php');
+
+	pageStart();
+
 ?>
 
-<title>Gestion livres</title>
-<head>Gestion des livres</head>
+<div id="contentPage">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Référence</th>
+				<th>Titre</th>
+				<th>Auteur</th>
+				<th>Année de parution</th>
+				<th>Emplacement</th>
+				<th>Etat actuel</th>
+				<th>Exemplaires</th>
+				<th>Appartenance</th>
+			</tr>
+		</thead>
 
-<h2>Ajouter un livre</h2>
+		<tbody>
+			<?php while($b = mysqli_fetch_assoc($book)) { ?>
+				<tr>
+					<td><?php echo $b['Reference']; ?></td>
+					<td><?php echo $b['Titre']; ?></td>
+					<td><?php echo $b['Auteur']; ?></td>
+					<td><?php echo $b['Annee_parution']; ?></td>
+					<td><?php echo $b['Emplacement']; ?></td>
+					<td><?php echo $b['Etat_actuel']; ?></td>
+					<td><?php echo $b['Exemplaires']; ?></td>
+					<td><?php echo $b['Bibli_media']; ?></td>
+					<td><a href="g-l.php?fkLivres=<?php echo $b['Reference']; ?>" class="btn btn-info"><i class="fas fa-user-edit"></i> Modifier</a></td>
+				</tr>
+			<?php } ?>
+		</tbody>
+	</table>
+	<h1>Gestion livres</h1>
 
-<div>
-	Titre
-	<input type="text" name="tl" required="required">
-</div>
-<div>
-	Auteur
-	<input type="text" name="au" required="required">
-</div>
-<div>
-	Référence
-	<input type="number" name="refe" required="required">
-</div>
-<div>
-	Année parution
-	<input type="number" name="ap" required="required">
-</div>
-<div>
-	Emplacement
-	<input type="text" name="emp" required="required">
-</div>
-<div>
-	Etat
-	<input type="text" name="et" required="required">
-</div>
-<div>
-	<input type="radio" name="appart">Bibliothèque
-	<input type="radio" name="appart">Médiathèque
-</div>
-<div>
-	<input type="submit" name="val1">
-</div>
+	<div class="row justify-content-center">
+		<form class="bloc-form col-md-8" action="g-l.php" method="post" >
 
-<div>
-	<button><a href ="accueil.php">Accueil</a></button>
-</div>
+			<div>
+				<label>Titre</label>
+				<input type="text" name="tl" required="required" class="form-control input-sm">
+			</div>
+			<div>
+				<label>Auteur</label>
+				<input type="text" name="au" required="required" class="form-control input-sm">
+			</div>
+			<div>
+				<label>Référence</label>
+				<input type="number" name="refe" required="required" class="form-control input-sm">
+			</div>
+			<div>
+				<label>Année parution</label>
+				<input type="number" name="ap" required="required" class="form-control input-sm">
+			</div>
+			<div>
+				<label>Emplacement</label>
+				<input type="text" name="emp" required="required" class="form-control input-sm">
+			</div>
+			<div>
+				<label>Exemplaires</label>
+				<input type="number" name="exem" required="required" class="form-control input-sm">
+			</div>
+			<div>
+				<label>Etat</label>
+				<input type="text" name="et" required="required" class="form-control input-sm">
+			</div>
+			<div>
+				<label>Appartenance</label>
+				<input type="radio" name="appart" value="bi">Bibliothèque
+				<input type="radio" name="appart" value="me">Médiathèque
+			</div>
 
-<div>
-	<a href="deco.php">Déconnexion</a>
+			<?php if(empty($infosAdh)) : ?>
+				<div class="row justify-content-center">
+					<button input type="submit" name="valid-btn" value="inscript" class="btn btn-success">Ajouter</button>
+				</div>
+			<?php else : ?>
+				<div class="row justify-content-center">
+					<button input type="submit" name="valid-btn" value="modif" class="btn btn-info">Modifier</button>
+					<button input type="submit" name="valid-btn" value="supp" class="btn btn-danger">Supprimer</button>
+				</div>
+			<?php endif; ?>
+
+		</form>
+	</div>
 </div>
+<?php
+
+	pageEnd();
+?>
