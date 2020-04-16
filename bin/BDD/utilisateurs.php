@@ -22,7 +22,7 @@ function is_loged(){
     return isset($_SESSION['ident']) ? true : false;
 }
 
-function verifco(){
+function verifco($ident , $pwd){
 
 	if ((isset($_POST['ident'])) && (isset($_POST['pwd']))) {
 		$ident = $_POST['ident'];
@@ -40,7 +40,7 @@ function verifco(){
 		if (password_verify($pwd, $row['pwd'])) {
 			
 			$_SESSION['ident'] = $row['ident'];
-			echo "true";
+			header('Location: accueil.php');
 		}
 		
 	}

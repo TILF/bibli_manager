@@ -2,6 +2,10 @@
 
 include_once('./bddacces.php');
 
+/**
+	 * Récupération de l'ensemble des données de tous les livres
+	 * @return ARRAY Données extraites de la BDD
+	 */
 	function get_allbooks(){
 
 		$bd = bd_connect();
@@ -11,7 +15,12 @@ include_once('./bddacces.php');
 		return $res;
 	}
 
+/**
+	 * Récupération de l'ensemble des données de tous les livres avec des exmplaires, donc non réservés
+	 * @return ARRAY Données extraites de la BDD
+	 */
 	function get_bookp(){
+
 
 		$bd = bd_connect();
 		$sql = "SELECT * FROM livres WHERE Exemplaires IS NOT NULL";
@@ -20,6 +29,10 @@ include_once('./bddacces.php');
 		return $res;
 	}
 
+/**
+	 * Récupération de livres selon le nom de l'auteur
+	 * @return ARRAY Données extraites de la BDD
+	 */
 	function get_bookbyauteur($au){
 
 		$bd = bd_connect();
@@ -29,6 +42,10 @@ include_once('./bddacces.php');
 		return $res;
 	}
 
+/**
+	 * Récupération de livres selon le titre
+	 * @return ARRAY Données extraites de la BDD
+	 */
 	function get_bookbytitre($tl){
 
 		$bd = bd_connect();
@@ -38,7 +55,18 @@ include_once('./bddacces.php');
 		return $res;
 	}
 
-	function addbook(){
+/**
+	 * Insertion d'un nouveau livre
+	 * @param  [INT] $refe  	[Reference]
+	 * @param  [STR] $tl 		[Titre]
+	 * @param  [STR] $au    	[Auteur]
+	 * @param  [STR] $ap    	[Annee_parution]
+	 * @param  [STR] $emp   	[Emplacement]
+	 * @param  [STR] $et  		[Etat_actuel]
+	 * @param  [INT] $exem  	[Exemplaires]
+	 * @param  [STR] $appart    [Appartenance]
+	 */
+	function addbook($refe , $tl , $au , $ap , $emp , $et , $exem , $appart){
 
 		$bd = bd_connect();
 		$sql = "INSERT INTO livres (Reference , Titre , Auteur , Annee_parution , Emplacement , Etat_actuel , Exemplaires , Bibli_media) VALUES ('$refe' , '$tl' , '$au' , '$ap' , '$emp' , '$et' , '$exem' , '$appart')";
@@ -46,7 +74,12 @@ include_once('./bddacces.php');
 		mysqli_close($bd);
 	}
 
-	function updatebook(){
+/**
+	 * Modification du nombre d'exemplaires
+	 * @param [INT] $Exem 		[Exemplaires]
+	 * @return ARRAY Données extraites de la BDD
+	 */
+	function updatebook($exem){
 
 		$bd = bd_connect();
 		$sql = "UPDATE livres
@@ -57,6 +90,7 @@ include_once('./bddacces.php');
 		return $res;
 	}
 
+/** Suppression d'un livre, recherche par titre **/
 	function removebook(){
 
 		$bd = bd_connect();

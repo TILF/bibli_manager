@@ -5,6 +5,44 @@
 
 	include_once('fct.php');
 	include_once('bddacces.php');
+	include_once('./BDD/g_book.php');
+
+	$book = get_allbooks();
+
+	if ((isset($_POST['refe'])) && (isset($_POST['tl'])) && (isset($_POST['au'])) && (isset($_POST['ap'])) && (isset($_POST['emp'])) && (isset($_POST['et'])) && (isset($_POST['exem'])) && (isset($_POST['appart']))) {
+
+		$refe = $_POST['refe'];
+		$tl = $_POST['tl'];
+		$au = $_POST['au'];
+		$ap = $_POST['ap'];
+		$emp = $_POST['emp'];
+		$et = $_POST['et'];
+		$exem = $_POST['exem'];
+		$appart = $_POST['appart'];
+	}
+
+	if(isset($_POST['valid-btn']) && $_POST['valid-btn'] === 'ajouter'){
+
+		addbook($_POST['refe'], $_POST['tl'], $_POST['au'], $_POST['ap'], $_POST['emp'], $_POST['et'], $_POST['exem'], $_POST['appart']);
+		header('Location: g-l.php');
+	}  
+	// --------------------------------- Si c'est une modification d'un existant -------------------------
+	else if(isset($_POST['valid-btn']) && $_POST['valid-btn'] === 'modif'){
+
+		updatebook($_POST['exem']);
+		header('Location: g-l.php');
+	} 
+	// --------------------------------- Si le bouton d'arrivée est une suppression
+	else if(isset($_POST['valid-btn']) && $_POST['valid-btn'] === 'supp'){
+
+		removebook($_POST['tl']);
+		header('Location: g-l.php');
+	}
+	// ---------------------------------- Si c'est une demande pour peupler la table de modification ------
+	else if(isset($_GET['refe'])){
+
+		$infosbook = get_bookbyauteur($_GET['tl']);
+	}
 
 	pageStart();
 
@@ -67,22 +105,30 @@
 				<input type="text" name="emp" required="required" class="form-control input-sm">
 			</div>
 			<div>
-				<label>Exemplaires</label>
-				<input type="number" name="exem" required="required" class="form-control input-sm">
+				<label for="sel1">Exemplaires</label>
+				<select type="number" name="exem" required="required" class="form-control input-sm">
+				<?php if(!empty($infosbook)) : ?>
+					<option>0</option>
+				<?php endif; ?>
+					<option>1</option>
+    				<option>2</option>
+    				<option>3</option>
+    				<option>4</option>
+    			</select>
 			</div>
 			<div>
 				<label>Etat</label>
-				<input type="text" name="et" required="required" class="form-control input-sm">
+				<input type="text" name="et" required="required" class="form-control">
 			</div>
 			<div>
 				<label>Appartenance</label>
-				<input type="radio" name="appart" value="bi">Bibliothèque
-				<input type="radio" name="appart" value="me">Médiathèque
+				<input type="radio" name="appart" value="Bibliothèque" class="radio-inline">Bibliothèque
+				<input type="radio" name="appart" value="Médiathèque" class="radio-inline">Médiathèque
 			</div>
 
-			<?php if(empty($infosAdh)) : ?>
+			<?php if(empty($infosbook)) : ?>
 				<div class="row justify-content-center">
-					<button input type="submit" name="valid-btn" value="inscript" class="btn btn-success">Ajouter</button>
+					<button input type="submit" name="valid-btn" value="ajouter" class="btn btn-success">Ajouter</button>
 				</div>
 			<?php else : ?>
 				<div class="row justify-content-center">
