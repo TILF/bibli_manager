@@ -49,8 +49,17 @@ include_once('./bddacces.php');
 	function get_bookbytitre($tl){
 
 		$bd = bd_connect();
-		$sql = "SELECT * FROM livre WHERE Titre = '$tl'";
+		$sql = "SELECT * FROM livres WHERE Titre = '$tl'";
 		$res = mysqli_query($bd , $sql) or mysqli_error($bd , $sql);
+		mysqli_close($bd);
+		return $res;
+	}
+
+	function get_bookbyrefe($refe){
+
+		$bd = bd_connect();
+		$sql = "SELECT * FROM livres WHERE Reference = '$refe'";
+		$res = mysqli_query($bd, $sql) or mysqli_error($bd , $sql);
 		mysqli_close($bd);
 		return $res;
 	}

@@ -86,4 +86,20 @@
 		$res = mysqli_query($bd, $sql) or bd_erreur($bd, $sql);
 		mysqli_close($bd);
 	}
+
+	function get_adherentbypnom($pnom){
+		$bd = bd_connect();
+		$sql = "SELECT * FROM adherents WHERE Prenom = '$pnom'";
+		$res = mysqli_query($bd, $sql) or bd_erreur($bd, $sql);
+		mysqli_close($bd);
+		return $res;
+	}
+
+	function get_adherentbynom($nom){
+		$bd = bd_connect();
+		$sql = "SELECT * FROM adherents WHERE Nom = '$nom'";
+		$res = mysqli_query($bd, $sql) or bd_erreur($bd, $sql);
+		mysqli_close($bd);
+		return $res;
+	}
 ?>
