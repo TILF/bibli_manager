@@ -1,5 +1,7 @@
 <?php
 
+
+// A delete
 include_once('./bddacces.php');
 
 function myass(){

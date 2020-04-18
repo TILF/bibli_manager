@@ -8,10 +8,6 @@ function connexion(){
 	}
 }
 
-function is_loged(){
-
-    return isset($_SESSION['ident']) ? true : false;
-}
 
 function myass(){
 	if ((isset($_POST['ident'])) && (isset($_POST['pwd']))) {
@@ -20,37 +16,39 @@ function myass(){
 	}
 }
 
-function verifco($ident , $pwd){
 
-  if ((isset($_POST['ident'])) && (isset($_POST['pwd']))) {
-    $ident = $_POST['ident'];
-    $pwd = $_POST['pwd'];
-  }
-
-  $bd = bd_connect();
-  $sql = "SELECT * FROM users WHERE ident = '$ident'";
-  $res = mysqli_query($bd, $sql) or bd_erreur($bd, $sql);
-  $num_row = mysqli_num_rows($res);
-  $row = mysqli_fetch_array($res);
-
-  if ($num_row >= 1) {
-
-    if (password_verify($pwd, $row['pwd'])) {
-      
-      $_SESSION['ident'] = $row['ident'];
-      header('Location: accueil.php');
-    }
-    
-  }
-  else{
-    echo "false";
-    header('Location: Bibli.php');
-  }
+/**
+ * Force la redirection vers une page spécifique
+ * @param  [SRT] $page  Path vers le ficher php
+ */
+function redirection($page){
+  header('Location:'.$page);
 }
 
+/**
+ * Vérification de l'état de connexion de la personne
+ * @return boolean  Vrai si un utilisateur est déjà connexté, Faux sinon
+ */
+function is_loged(){
+    return isset($_SESSION['ident']) ? true : false;
+}
 
+/**
+ * Vérifie que les données POST shouaitées soint bien présentes.
+ * 
+ * @param  ARRAY  $array Tableau contenant les données à checker et leur valeur attendue si besoin. Forme : array( array('nom' => nom du POST, 'excpected' => Valeur attendue ou null si pas de vérif), ...)
+ * @return  boolean Vrai si tout est OK ,faux sinon
+ */
+function verify_post_params($array){
 
+  foreach($array as $postToCheck){
+    if(!$_POST[$postToCheck['nom']] || ($postToCheck['excpected'] !== null && $_POST[$postToCheck['nom']] != $postToCheck['excpected'])){
+      return false;
+    }
+    return true;
+  }
 
+} 
 
 
 
@@ -124,11 +122,13 @@ function pageStart(){
               '</div> ',
                            
           '</div>',
-        '</nav>';
+        '</nav>',
+
+        '<div id="contentPage"';
 }
 
 function pageEnd(){
-    echo
+    echo '</div>',
         '</body>',
   '</html>';
 }

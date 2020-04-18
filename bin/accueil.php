@@ -9,10 +9,8 @@
 	include_once('./BDD/adherent.php');
 
 	if (isset($_SESSION['ident'])) {
-		
 		$ident = $_SESSION['ident'];
 	}
-
 	else{
 		header('Location: Bibli.php');
 	}
