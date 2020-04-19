@@ -118,13 +118,15 @@ function pageStart(){
               
                
               '<div class="form-inline my-2 my-lg-0">',
-                   '<a class="btn btn-outline-success my-2 my-sm-0" type="submit" href="#">Delavoux</a>',
+                    '<a class="btn btn-outline-success my-2 my-sm-0" type="submit" href="' . ( isset($_SESSION['ident']) ? 'deconnexion.php' : 'Bibli.php' ) .'">
+                       '. (isset($_SESSION['ident']) ? 'LogOut' : 'Login') .'
+                    </a>',
               '</div> ',
                            
           '</div>',
         '</nav>',
 
-        '<div id="contentPage"';
+        '<div id="contentPage">';
 }
 
 function pageEnd(){

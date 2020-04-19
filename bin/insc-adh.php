@@ -9,8 +9,6 @@
 	// Réupération de l'ensemble des adhérents pour affichage sur la page
 	$adh = getAllAdherents();
 
-
-
 	// Vérification anti Hacking -> TODO a remplacer par une déconnexion propore quand la connexion et la session sera effective
 	$_GET && $_POST && die('Tentative de Hack');
 

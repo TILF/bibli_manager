@@ -10,7 +10,7 @@ include_once('./bddacces.php');
 
 		$bd = bd_connect();
 		$sql = "SELECT * FROM livres";
-		$res = mysqli_query($bd , $sql) or bd_erreur($bd , $sql);
+		$res = mysqli_query($bd , $sql) or bd_erreur($bd , $sql);;
 		mysqli_close($bd);
 		return $res;
 	}
@@ -24,7 +24,7 @@ include_once('./bddacces.php');
 
 		$bd = bd_connect();
 		$sql = "SELECT * FROM livres WHERE Exemplaires IS NOT NULL";
-		$res = mysqli_query($bd , $sql) or mysqli_error($bd , $sql);
+		$res = mysqli_query($bd , $sql) or bd_erreur($bd , $sql);
 		mysqli_close($bd);
 		return $res;
 	}
@@ -37,9 +37,10 @@ include_once('./bddacces.php');
 
 		$bd = bd_connect();
 		$sql = "SELECT * FROM livres WHERE  Auteur = '$au'";
-		$res = mysqli_query($bd , $sql) or mysqli_error($bd , $sql);
+		$res = mysqli_query($bd , $sql) or bd_erreur($bd , $sql);
+		$book = mysqli_fetch_assoc($res);
 		mysqli_close($bd);
-		return $res;
+		return $book;
 	}
 
 /**
@@ -50,18 +51,20 @@ include_once('./bddacces.php');
 
 		$bd = bd_connect();
 		$sql = "SELECT * FROM livres WHERE Titre = '$tl'";
-		$res = mysqli_query($bd , $sql) or mysqli_error($bd , $sql);
+		$res = mysqli_query($bd , $sql) or bd_erreur($bd , $sql);
+		$book = mysqli_fetch_assoc($res);
 		mysqli_close($bd);
-		return $res;
+		return $book;
 	}
 
 	function get_bookbyrefe($refe){
 
 		$bd = bd_connect();
 		$sql = "SELECT * FROM livres WHERE Reference = '$refe'";
-		$res = mysqli_query($bd, $sql) or mysqli_error($bd , $sql);
+		$res = mysqli_query($bd, $sql) or bd_erreur($bd , $sql);
+		$book = mysqli_fetch_assoc($res);
 		mysqli_close($bd);
-		return $res;
+		return $book;
 	}
 
 /**
@@ -76,10 +79,11 @@ include_once('./bddacces.php');
 	 * @param  [STR] $appart    [Appartenance]
 	 */
 	function addbook($refe , $tl , $au , $ap , $emp , $et , $exem , $appart){
-
+		//die('ok');
 		$bd = bd_connect();
-		$sql = "INSERT INTO livres (Reference , Titre , Auteur , Annee_parution , Emplacement , Etat_actuel , Exemplaires , Bibli_media) VALUES ('$refe' , '$tl' , '$au' , '$ap' , '$emp' , '$et' , '$exem' , '$appart')";
-		$res = mysqli_query($bd , $sql) or mysqli_error($bd, $sql);
+		$sql = "INSERT INTO livres (Reference , Nom , Auteur , Annee_parution , Emplacement , Etat_actuel , Exemplaires , Bibli_media) 
+				VALUES ('$refe' , '$tl' , '$au' , '$ap' , '$emp' , '$et' , '$exem' , '$appart')";
+		$res = mysqli_query($bd, $sql) or bd_erreur($bd, $sql);
 		mysqli_close($bd);
 	}
 
@@ -88,23 +92,23 @@ include_once('./bddacces.php');
 	 * @param [INT] $Exem 		[Exemplaires]
 	 * @return ARRAY Données extraites de la BDD
 	 */
-	function updatebook($exem){
+	function updatebook($exem, $refe){
 
 		$bd = bd_connect();
 		$sql = "UPDATE livres
 				SET  Exemplaires = '$exem'
 				WHERE Reference = '$refe'";
-		$res = mysqli_query($bd , $sql);
+		$res = mysqli_query($bd , $sql)  or bd_erreur($bd, $sql);
 		mysqli_close($bd);
 		return $res;
 	}
 
 /** Suppression d'un livre, recherche par titre **/
-	function removebook(){
+	function removebook($refe){
 
 		$bd = bd_connect();
-		$sql = "DELETE FROM livres WHERE Titre = '$tl'";
-		$res = mysqli_query($bd , $sql) or mysqli_error($bd , $sql);
+		$sql = "DELETE FROM livres WHERE Reference = '$refe'";
+		$res = mysqli_query($bd , $sql) or bd_erreur($bd , $sql);
 		mysqli_close($bd);
 	}
 ?>

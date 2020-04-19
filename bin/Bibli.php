@@ -31,6 +31,7 @@
 		if(intval(UserExist($_POST['ident'], $_POST['pwd'])) > 0) {
 			//Mise en session des éléments
 			$_SESSION['ident'] = $_POST['ident'];
+			redirection('./accueil.php');
 		}else{
 			$error = array('Le couple ID / MDP ne corresponds pas à un utilisateur de l\'application');
 		}
@@ -58,46 +59,7 @@
 	pageStart();
 ?>
 
-
-<!-- 
-	Attention il y a deja une balise unique body et une div générale de content amenés par la fonction pagestart() ! la balise body doit être unique !!
-	Il est conseillé de charger ton background via CSS. Il faut centraliser touts les styles 
--->
-
-<!-- <body background="../images/i-co.jpeg" class="img-responsive">
-	<div class="bg"></div>
-    <p class="py-5 text-center">
-	<div id="content">
-		<div id="bloc_login">
-			<form action="bibli.php" method="post">
-				<div>
-					<h2 id="t2" class="titre">Connexion</h2>
-				</div>
-
-				<div id="form-group" class="col-xs-4">
-					<label>Identifiant</label>
-					<input type="text"  class="form-control" name="ident" required="required" value="<?php if (isset($_POST['ident'])) echo htmlentities(trim($_POST['ident'])); ?>">
-				</div>
-
-				<div id="form-group" class="col-xs-4">
-					<label>Mot de passe</label>
-					<input type="password"  class="form-control" name="pwd" required="required" value="<?php if (isset($_POST['pwd'])) echo htmlentities(trim($_POST['pwd'])); ?>">
-				</div>
-
-				<div class="col-xs-4" >
-					<input type="checkbox"  name="Rm"> Se souvenir de moi!
-				</div>
-
-				<div class="col-xs-4"> 
-					<button type="submit" name="cxn" value= 'cxn' class="btn btn-success">Valider</button>
-				</div>
-			</form>
-		</div>
-	</div>
-</body>
-
-<footer></footer> -->
-
+	<?php !empty($error) && var_dump($error); ?>
 	<div id="login-Page-101">
 	    <div id="centered-bloc" class="col-md-4">
 	        <h3 class="text-center">Connexion</h3>
