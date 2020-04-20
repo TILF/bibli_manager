@@ -6,8 +6,28 @@
 	include_once('fct.php');
 	include_once('./BDD/g_book.php');
 
-	// Vérification anti Hacking -> TODO a remplacer par une déconnexion propore quand la connexion et la session sera effective
-	$_GET && $_POST && die('Tentative de Hack');
+	
+	if (isset($_SESSION['ident'])) {
+		$ident = $_SESSION['ident'];
+	}
+	else{
+		header('Location: Bibli.php');
+	}
+
+	if (isset($_POST['valid-btn'])&& $_POST['valid-btn'] === 'ajouter' || 'modif' || 'supp') {
+			if ((!empty($_POST['refe'])) && (!empty($_POST['tl'])) && (!empty($_POST['au'])) && (!empty($_POST['ap'])) && (!empty($_POST['emp'])) && (!empty($_POST['et'])) && (!empty($_POST['exem'])) && (!empty($_POST['appart']))) {
+
+				$refe = protection($_POST['refe']);
+				$tl = protection($_POST['tl']);
+				$au = protection($_POST['au']);
+				$ap = protection($_POST['ap']);
+				$emp = protection($_POST['emp']);
+				$et = protection($_POST['et']);
+				$exem = protection($_POST['exem']);
+				$appart = protection($_POST['appart']);
+			}
+	}
+
 
 	$book = get_allbooks();
 
@@ -54,7 +74,7 @@
 			<?php while($b = mysqli_fetch_assoc($book)) { ?>
 				<tr>
 					<td><?php echo $b['Reference']; ?></td>
-					<td><?php echo $b['Nom']; ?></td>
+					<td><?php echo $b['Titre']; ?></td>
 					<td><?php echo $b['Auteur']; ?></td>
 					<td><?php echo $b['Annee_parution']; ?></td>
 					<td><?php echo $b['Emplacement']; ?></td>
@@ -81,7 +101,7 @@
 
 			<div>
 				<label>Titre</label>
-				<input type="text" name="tl" required="required" class="form-control input-sm" value="<?php echo isset($infosbook['Nom']) ? $infosbook['Nom'] : '' ?>">
+				<input type="text" name="tl" required="required" class="form-control input-sm" value="<?php echo isset($infosbook['Titre']) ? $infosbook['Titre'] : '' ?>">
 			</div>
 			<div>
 				<label>Auteur</label>

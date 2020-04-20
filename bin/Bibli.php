@@ -68,12 +68,12 @@
 	            
 	            <div class="form-group">
 	                <label for="login">Identifiant</label>
-	                <input type="text"  class="form-control" name="ident" required="required" value="<?php echo isset($_POST['ident']) ? htmlentities(trim($_POST['ident'])) : '' ; ?>">
+	                <input type="text"  class="form-control" name="ident" required="required" value="<?php echo isset($_POST['ident']) ? htmlentities(trim($_POST['ident'])) : '' ; ?>" maxlenght ='20'/>
 	            </div>
 
 	            <div class="form-group">
 	                <label for="login">Mot de passe</label>
-	                <input type="password"  class="form-control" name="pwd" required="required" value="<?php echo isset($_POST['pwd']) ? htmlentities(trim($_POST['pwd'])) : ''; ?>" />
+	                <input type="password"  class="form-control" name="pwd" required="required" value="<?php echo isset($_POST['pwd']) ? htmlentities(trim($_POST['pwd'])) : ''; ?>" maxlenght ='20' />
 	            </div>
 
 	            <div class="form-btn text-center">

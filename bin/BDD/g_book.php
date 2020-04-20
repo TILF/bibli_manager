@@ -81,7 +81,7 @@ include_once('./bddacces.php');
 	function addbook($refe , $tl , $au , $ap , $emp , $et , $exem , $appart){
 		//die('ok');
 		$bd = bd_connect();
-		$sql = "INSERT INTO livres (Reference , Nom , Auteur , Annee_parution , Emplacement , Etat_actuel , Exemplaires , Bibli_media) 
+		$sql = "INSERT INTO livres (Reference , Titre , Auteur , Annee_parution , Emplacement , Etat_actuel , Exemplaires , Bibli_media) 
 				VALUES ('$refe' , '$tl' , '$au' , '$ap' , '$emp' , '$et' , '$exem' , '$appart')";
 		$res = mysqli_query($bd, $sql) or bd_erreur($bd, $sql);
 		mysqli_close($bd);

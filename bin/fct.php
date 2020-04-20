@@ -48,7 +48,15 @@ function verify_post_params($array){
     return true;
   }
 
-} 
+}
+
+function protection($data){
+
+  $data = trim($data);
+  $data = stripcslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
 
 
 
@@ -105,7 +113,7 @@ function pageStart(){
                    'Autre',
                  ' </a>',
                   '<div class="dropdown-menu" aria-labelledby="navbarDropdown">',
-                    '<a class="dropdown-item" href="#">Voir les adhérents</a>',
+                    '<a class="dropdown-item" href="#">Reservation Livres</a>',
                     '<a class="dropdown-item" href="#">Another action</a>',
                     '<div class="dropdown-divider"></div>',
                     '<a class="dropdown-item" href="#">Something else here</a>',

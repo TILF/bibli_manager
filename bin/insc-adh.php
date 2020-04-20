@@ -9,10 +9,26 @@
 	// Réupération de l'ensemble des adhérents pour affichage sur la page
 	$adh = getAllAdherents();
 
-	// Vérification anti Hacking -> TODO a remplacer par une déconnexion propore quand la connexion et la session sera effective
-	$_GET && $_POST && die('Tentative de Hack');
+	
+	if (isset($_SESSION['ident'])) {
+		$ident = $_SESSION['ident'];
+	}
+	else{
+		header('Location: Bibli.php');
+	}
 
+	if (isset($_POST['valid-btn'])&& $_POST['valid-btn'] === 'inscript') {
+			if ((!empty($_POST['nom'])) && (!empty($_POST['pnom'])) && (!empty($_POST['age'])) && (!empty($_POST['tel'])) && (!empty($_POST['nrue'])) && (!empty($_POST['zcode'])) && (!empty($_POST['vi']))) {
 
+				$nom = protection($_POST['nom']);
+				$pnom = protection($_POST['pnom']);
+				$age = protection($_POST['age']);
+				$tel = protection($_POST['tel']);
+				$nrue = protection($_POST['nrue']);
+				$zcode = protection($_POST['zcode']);
+				$vi = protection($_POST['vie']);
+			}
+	}
 	// On Regarde le bouton qui a forcé l'arrivée sur la page pour savoir quelle action réaliser
 	// Ensuite on fait le traitement et on force le rechargement de la page
 	// -----------------------------------  Si le bouton d'arrivé est une inscription -----------------------
@@ -44,7 +60,7 @@
 <div id="contentPage">
 
 	<!--------------------------- Tableau des adhérents ----------------------------------------->
-	<h1>Gestion des adhérent</h1>
+	<h1>Gestion des adhérents</h1>
 	<table class="table">
 		<thead>
 			<tr>
