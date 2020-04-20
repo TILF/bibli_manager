@@ -6,7 +6,8 @@ body, html{
 body{
 	display: flex;
 	flex-direction: column;
-	background-color: #AAB2FA;
+	background-image: url(../images/machina.jpg);
+  	background-size: cover;	
 }
 
 
