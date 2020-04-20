@@ -28,11 +28,15 @@
 		 )) && die('Erreur dans les paramètres POST attendues');
 
 		// ---- TODO : Devoir maison, véririfer que l'id nexiste pas déjà avant de le créer
-		// 
-		// Insertion et redirection
-		insertUsr($_POST['ident'], $_POST['pwd']);
-		redirection('./Bibli.php');
+	if(intval(UserExist($_POST['ident'], $_POST['pwd'])) > 0) {
+			redirection('./bibli.php');
+		}
+		else{
+			insertUsr($_POST['ident'], $_POST['pwd']);
+			redirection('./Bibli.php');
+		}
 	}
+
 
 
 	/* #################################################################################################

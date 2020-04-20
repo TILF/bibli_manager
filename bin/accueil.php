@@ -17,7 +17,9 @@
 	pageStart();
 
 ?>
-
+<div id="Accueillant">
+	A venir
+</div>
 <title>Accueil</title>
 <h1>Acceuil</h1>
 
