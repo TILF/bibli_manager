@@ -49,6 +49,8 @@
 				<input type="hidden" name="Idlocation" value="<?php echo htmlentities($infosloc['Id_emprunt']) ?>">
 			<?php endif; ?>
 
+			<input type="hidden"  name="refLivre" id="refLivre" value="">
+			<input type="hidden"  name="idAdh" id="idAdh" value="">
 
 			<div class="row">
 				<div class="form-group col-md-3">
@@ -61,11 +63,11 @@
 				</div>
 				<div class="form-group col-md-3">
 					<label>Livre</label>
-					<input type="text" name="livre" required="required" class="form-control input-sm" value="<?php echo htmlentities(!empty($infosloc) ? $infosloc['fk_Livres'] : ''); ?>">
+					<input type="text" id="searchBook" name="livre" required="required" class="form-control input-sm" value="<?php echo htmlentities(!empty($infosloc) ? $infosloc['fk_Livres'] : ''); ?>">
 				</div>
 				<div class="form-group col-md-3">
 					<label>Adhérent</label>
-					<input type="text" name="nom" required="required" class="form-control input-sm" value="<?php echo htmlentities(!empty($infosloc) ? $infosloc['fk_adherents'] : ''); ?>">
+					<input type="text" name="nom" id="searchAdherent" required="required" class="form-control input-sm" value="<?php echo htmlentities(!empty($infosloc) ? $infosloc['fk_adherents'] : ''); ?>">
 				</div>
 			</div>
 			
@@ -107,3 +109,85 @@
 	pageEnd();
 
 ?>
+
+
+<script src="../js/typeahead.js"></script>
+<script>
+
+	// Recherche des patters marquant avec la saisie du livre ---------
+	$('#searchBook').typeahead({
+	    delay : 500,
+	     source: function (query, process) {
+	        return $.ajax({
+	            url: './BDD/ajax_book.php',
+	            type: 'post',
+	            dataType: 'json',
+	            data: { pattern: query, demand: 'byTitle' },
+	            success: function (jsonResult) {
+	                if(typeof jsonResult == 'undefined'){
+	                	return false;
+	                }else{
+	                	return process(jsonResult);
+	                }
+	            }
+	        });
+	    },
+	    updater: function (item) {
+	    	searchBookInfos(item);
+	    	return item;
+	    },
+	    minLength: 2
+    });
+	// Recherche de la référence et insertion dans l'input
+    function searchBookInfos(item){
+    	 $.ajax({
+            url: './BDD/ajax_book.php',
+            type: 'post',
+            dataType: 'json',
+            data: { pattern: item, demand: 'fullInfos' },
+            success: function (jsonResult) {
+            	$('#refLivre').val(jsonResult.Reference);
+            }
+        });
+    }
+
+
+    // IDM au dessus mais avec l'adhérent
+	$('#searchAdherent').typeahead({
+	    delay : 500,
+	     source: function (query, process) {
+	        return $.ajax({
+	            url: './BDD/ajax_adherent.php',
+	            type: 'post',
+	            dataType: 'json',
+	            data: { pattern: query, demand: 'byName' },
+	            success: function (jsonResult) {
+	                if(typeof jsonResult == 'undefined'){
+	                	return false;
+	                }else{
+	                	return process(jsonResult);
+	                }
+	            }
+	        });
+	    },
+	    updater: function (item) {
+	    	searchAdherentInfos(item);
+	    	return item;
+	    },
+	    minLength: 2
+    });
+
+    function searchAdherentInfos(item){
+    	 $.ajax({
+            url: './BDD/ajax_adherent.php',
+            type: 'post',
+            dataType: 'json',
+            data: { pattern: item, demand: 'fullInfos' },
+            success: function (jsonResult) {
+            	$('#idAdh').val(jsonResult.Id);
+            }
+        });
+    }
+
+</script>
+

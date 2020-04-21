@@ -42,40 +42,42 @@
 ?>
 
 <div id="contentPage">
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Référence</th>
-				<th>Titre</th>
-				<th>Auteur</th>
-				<th>Année de parution</th>
-				<th>Emplacement</th>
-				<th>Etat actuel</th>
-				<th>Exemplaires</th>
-				<th>Appartenance</th>
-			</tr>
-		</thead>
+	<div id="ContentTest" class="container">
 
-		<tbody>
-			<?php while($b = mysqli_fetch_assoc($book)) { ?>
+		<h1>Gestion livres</h1>
+		<table class="table">
+			<thead>
 				<tr>
-					<td><?php echo htmlentities($b['Reference']); ?></td>
-					<td><?php echo htmlentities($b['Titre']); ?></td>
-					<td><?php echo htmlentities($b['Auteur']); ?></td>
-					<td><?php echo htmlentities($b['Annee_parution']); ?></td>
-					<td><?php echo htmlentities($b['Emplacement']); ?></td>
-					<td><?php echo htmlentities($b['Etat_actuel']); ?></td>
-					<td><?php echo htmlentities($b['Exemplaires']); ?></td>
-					<td><?php echo htmlentities($b['Bibli_media']); ?></td>
-					<td><a href="g-l.php?fkLivres=<?php echo htmlentities($b['Reference']); ?>" class="btn btn-info"><i class="fas fa-user-edit"></i> Modifier</a></td>
+					<th>Référence</th>
+					<th>Titre</th>
+					<th>Auteur</th>
+					<th>Année de parution</th>
+					<th>Emplacement</th>
+					<th>Etat actuel</th>
+					<th>Exemplaires</th>
+					<th>Appartenance</th>
+					<th>Modifer</th>
 				</tr>
-			<?php } ?>
-		</tbody>
-	</table>
-	<h1>Gestion livres</h1>
+			</thead>
 
-	<div class="row justify-content-center">
-		<form class="bloc-form col-md-8" action="g-l.php" method="post" >
+			<tbody>
+				<?php while($b = mysqli_fetch_assoc($book)) { ?>
+					<tr>
+						<td><?php echo htmlentities($b['Reference']); ?></td>
+						<td><?php echo htmlentities($b['Titre']); ?></td>
+						<td><?php echo htmlentities($b['Auteur']); ?></td>
+						<td><?php echo htmlentities($b['Annee_parution']); ?></td>
+						<td><?php echo htmlentities($b['Emplacement']); ?></td>
+						<td><?php echo htmlentities($b['Etat_actuel']); ?></td>
+						<td><?php echo htmlentities($b['Exemplaires']); ?></td>
+						<td><?php echo htmlentities($b['Bibli_media']); ?></td>
+						<td><a href="g-l.php?fkLivres=<?php echo htmlentities($b['Reference']); ?>" class="btn btn-info">Modifier</a></td>
+					</tr>
+				<?php } ?>
+			</tbody>
+		</table>
+		
+		<form action="g-l.php col-md-12" method="post" >
 
 			<!-- Si c'est vide c'est une inscription, sinon c'est une modification et on garde l'Id de la personne dans un champ caché -->
 			<?php if(empty($infosbook)) : ?>
@@ -129,11 +131,16 @@
 					<button input type="submit" name="valid-btn" value="supp" class="btn btn-danger">Supprimer</button>
 				</div>
 			<?php endif; ?>
-
 		</form>
+
 	</div>
 </div>
 <?php
 
 	pageEnd();
 ?>
+
+<script>
+	$('.table').dataTable();
+	$('.search').addClass('form-control');
+</script>
