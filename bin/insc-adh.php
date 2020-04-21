@@ -75,7 +75,7 @@
 					<td><?php echo htmlentities($t['Adresse']); ?></td>
 					<td><?php echo htmlentities($t['CP'] . " " . $t['Ville']); ?></td>
 					<td><?php echo htmlentities($t['Cotisation']); ?></td>
-					<td><a href="insc-adh.php?fkAdherent=<?php echo $t['Id']; ?>" class="btn btn-info"><i class="fas fa-user-edit"></i> Modifier</a></td>
+					<td><a href="insc-adh.php?fkAdherent=<?php echo htmlentities($t['Id']); ?>" class="btn btn-info"><i class="fas fa-user-edit"></i> Modifier</a></td>
 				</tr>
 			<?php } ?>
 		</tbody>
@@ -91,41 +91,41 @@
 				<h3>Ajouter un Ahdérent</h3>
 			<?php else : ?>
 				<h3>Modifier l'Adhérent</h3>
-				<input type="hidden" name="IdAdherent" value="<?php echo $infosAdh['Id'] ?>">
+				<input type="hidden" name="IdAdherent" value="<?php echo htmlentities($infosAdh['Id']) ?>">
 			<?php endif; ?>
 
 
 			<div class="row">
 				<div class="form-group col-md-3">
 					<label>Nom</label>
-					<input type="text" name="nom" required="required" class="form-control input-sm" value="<?php echo !empty($infosAdh) ? $infosAdh['Nom'] : ''; ?>">
+					<input type="text" name="nom" required="required" class="form-control input-sm" value="<?php echo htmlentities(!empty($infosAdh) ? $infosAdh['Nom'] : ''); ?>">
 				</div>
 				<div class="form-group col-md-3">
 					<label>Prénom</label>
-					<input type="text" name="pnom" required="required" class="form-control input-sm" value="<?php echo !empty($infosAdh) ? $infosAdh['Prenom'] : ''; ?>">
+					<input type="text" name="pnom" required="required" class="form-control input-sm" value="<?php echo htmlentities(!empty($infosAdh) ? $infosAdh['Prenom'] : ''); ?>">
 				</div>
 				<div class="form-group col-md-3">
 					<label>Age</label>
-					<input type="number" name="age" required="required" class="form-control input-sm" value="<?php echo !empty($infosAdh) ? $infosAdh['Age'] : ''; ?>">
+					<input type="number" name="age" required="required" class="form-control input-sm" value="<?php echo htmlentities(!empty($infosAdh) ? $infosAdh['Age'] : ''); ?>">
 				</div>
 				<div class="form-group col-md-3">
 					<label>Téléphone</label>
-					<input type="number" name="tel" required="required" class="form-control input-sm" value="<?php echo !empty($infosAdh) ? $infosAdh['Telephone'] : ''; ?>">
+					<input type="number" name="tel" required="required" class="form-control input-sm" value="<?php echo htmlentities(!empty($infosAdh) ? $infosAdh['Telephone'] : ''); ?>">
 				</div>
 			</div>
 			
 			<div class="row">
 				<div class="form-group col-md-3">
 					<label>Numéro et rue</label>
-					<input type="text" name="nrue" required="required" class="form-control input-sm" value="<?php echo !empty($infosAdh) ? $infosAdh['Adresse'] : ''; ?>">
+					<input type="text" name="nrue" required="required" class="form-control input-sm" value="<?php echo htmlentities(!empty($infosAdh) ? $infosAdh['Adresse'] : ''); ?>">
 				</div >
 				<div class="form-group col-md-3">
 					<label>Code postal</label>
-					<input type="number" name="zcode" required="required" class="form-control input-sm" value="<?php echo !empty($infosAdh) ? $infosAdh['CP'] : ''; ?>">
+					<input type="number" name="zcode" required="required" class="form-control input-sm" value="<?php echo htmlentities(!empty($infosAdh) ? $infosAdh['CP'] : ''); ?>">
 				</div>
 				<div class="form-group col-md-3">
 					<label>Ville</label>
-					<input type="text" name="vi" required="required" class="form-control input-sm" value="<?php echo !empty($infosAdh) ? $infosAdh['Ville'] : ''; ?>">
+					<input type="text" name="vi" required="required" class="form-control input-sm" value="<?php echo htmlentities(!empty($infosAdh) ? $infosAdh['Ville'] : ''); ?>">
 				</div>
 			</div>
 

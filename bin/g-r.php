@@ -46,41 +46,41 @@
 				<h3>Faire une réservation</h3>
 			<?php else : ?>
 				<h3>Mettre à jour la réservation</h3>
-				<input type="hidden" name="Idlocation" value="<?php echo $infosloc['Id_emprunt'] ?>">
+				<input type="hidden" name="Idlocation" value="<?php echo htmlentities($infosloc['Id_emprunt']) ?>">
 			<?php endif; ?>
 
 
 			<div class="row">
 				<div class="form-group col-md-3">
 					<label>Date de début</label>
-					<input type="date" name="date_d" required="required" class="form-control input-sm" value="<?php echo !empty($infosloc) ? $infosloc['Date_debut'] : ''; ?>">
+					<input type="date" name="date_d" required="required" class="form-control input-sm" value="<?php echo htmlentities(!empty($infosloc) ? $infosloc['Date_debut'] : ''); ?>">
 				</div>
 				<div class="form-group col-md-3">
 					<label>Date de fin</label>
-					<input type="date" name="date_r" required="required" class="form-control input-sm" value="<?php echo !empty($infosloc) ? $infosloc['Date_fin'] : ''; ?>">
+					<input type="date" name="date_r" required="required" class="form-control input-sm" value="<?php echo htmlentities(!empty($infosloc) ? $infosloc['Date_fin'] : ''); ?>">
 				</div>
 				<div class="form-group col-md-3">
 					<label>Livre</label>
-					<input type="text" name="livre" required="required" class="form-control input-sm" value="<?php echo !empty($infosloc) ? $infosloc['fk_Livres'] : ''; ?>">
+					<input type="text" name="livre" required="required" class="form-control input-sm" value="<?php echo htmlentities(!empty($infosloc) ? $infosloc['fk_Livres'] : ''); ?>">
 				</div>
 				<div class="form-group col-md-3">
 					<label>Adhérent</label>
-					<input type="text" name="nom" required="required" class="form-control input-sm" value="<?php echo !empty($infosloc) ? $infosloc['fk_adherents'] : ''; ?>">
+					<input type="text" name="nom" required="required" class="form-control input-sm" value="<?php echo htmlentities(!empty($infosloc) ? $infosloc['fk_adherents'] : ''); ?>">
 				</div>
 			</div>
 			
 			<div class="row">
 				<div class="form-group col-md-3">
 					<label>Date de rendu</label>
-					<input type="date" name="date_r" class="form-control input-sm" value="<?php echo !empty($infosloc) ? $infosloc['Date_rendu'] : ''; ?>">
+					<input type="date" name="date_r" class="form-control input-sm" value="<?php echo htmlentities(!empty($infosloc) ? $infosloc['Date_rendu'] : ''); ?>">
 				</div >
 				<div class="form-group col-md-3">
 					<label>Etat</label>
-					<input type="text" name="etat" class="form-control input-sm" value="<?php echo !empty($infosloc) ? $infosloc['Etat'] : ''; ?>">
+					<input type="text" name="etat" class="form-control input-sm" value="<?php echo htmlentities(!empty($infosloc) ? $infosloc['Etat'] : ''); ?>">
 				</div>
 				<div class="form-group col-md-3">
 					<label>Rendu</label>
-					<input type="text" name="rendu" class="form-control input-sm" value="<?php echo !empty($infosloc) ? $infosloc['Rendu'] : ''; ?>">
+					<input type="text" name="rendu" class="form-control input-sm" value="<?php echo htmlentities(!empty($infosloc) ? $infosloc['Rendu'] : ''); ?>">
 				</div>
 			</div>
 

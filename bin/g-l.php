@@ -67,7 +67,7 @@
 					<td><?php echo htmlentities($b['Etat_actuel']); ?></td>
 					<td><?php echo htmlentities($b['Exemplaires']); ?></td>
 					<td><?php echo htmlentities($b['Bibli_media']); ?></td>
-					<td><a href="g-l.php?fkLivres=<?php echo $b['Reference']; ?>" class="btn btn-info"><i class="fas fa-user-edit"></i> Modifier</a></td>
+					<td><a href="g-l.php?fkLivres=<?php echo htmlentities($b['Reference']); ?>" class="btn btn-info"><i class="fas fa-user-edit"></i> Modifier</a></td>
 				</tr>
 			<?php } ?>
 		</tbody>
@@ -82,41 +82,41 @@
 				<h3>Ajouter un Livre</h3>
 			<?php else : ?>
 				<h3>Modifier un livre</h3>
-				<input type="hidden" name="refBook" value="<?php echo $infosbook['Reference'] ?>">
+				<input type="hidden" name="refBook" value="<?php echo htmlentities($infosbook['Reference']) ?>">
 			<?php endif; ?>
 
 			<div>
 				<label>Titre</label>
-				<input type="text" name="tl" required="required" class="form-control input-sm" value="<?php echo isset($infosbook['Titre']) ? $infosbook['Titre'] : '' ?>">
+				<input type="text" name="tl" required="required" class="form-control input-sm" value="<?php echo htmlentities(isset($infosbook['Titre']) ? $infosbook['Titre'] : '') ?>">
 			</div>
 			<div>
 				<label>Auteur</label>
-				<input type="text" name="au" required="required" class="form-control input-sm" value="<?php echo isset($infosbook['Auteur']) ? $infosbook['Auteur'] : '' ?>">
+				<input type="text" name="au" required="required" class="form-control input-sm" value="<?php echo htmlentities(isset($infosbook['Auteur']) ? $infosbook['Auteur'] : '') ?>">
 			</div>
 			<div>
 				<label>Référence</label>
-				<input type="number" name="refe" required="required" class="form-control input-sm" value="<?php echo isset($infosbook['Reference']) ? $infosbook['Reference'] : '' ?>">
+				<input type="number" name="refe" required="required" class="form-control input-sm" value="<?php echo htmlentities(isset($infosbook['Reference']) ? $infosbook['Reference'] : '') ?>">
 			</div>
 			<div>
 				<label>Année parution</label>
-				<input type="number" name="ap" required="required" class="form-control input-sm" value="<?php echo isset($infosbook['Annee_parution']) ? $infosbook['Annee_parution'] : '' ?>">
+				<input type="number" name="ap" required="required" class="form-control input-sm" value="<?php echo htmlentities(isset($infosbook['Annee_parution']) ? $infosbook['Annee_parution'] : '') ?>">
 			</div>
 			<div>
 				<label>Emplacement</label>
-				<input type="text" name="emp" required="required" class="form-control input-sm" value="<?php echo isset($infosbook['Emplacement']) ? $infosbook['Emplacement'] : '' ?>">
+				<input type="text" name="emp" required="required" class="form-control input-sm" value="<?php echo htmlentities(isset($infosbook['Emplacement']) ? $infosbook['Emplacement'] : '') ?>">
 			</div>
 			<div>
 				<label for="sel1">Exemplaires</label>
-				<input type="number" name="exem" required="required" class="form-control input-sm" value="<?php echo isset($infosbook['Exemplaires']) ? $infosbook['Exemplaires'] : '' ?>">
+				<input type="number" name="exem" required="required" class="form-control input-sm" value="<?php echo htmlentities(isset($infosbook['Exemplaires']) ? $infosbook['Exemplaires'] : '') ?>">
 			</div>
 			<div>
 				<label>Etat</label>
-				<input type="text" name="et" required="required" class="form-control" value="<?php echo isset($infosbook['Etat_actuel']) ? $infosbook['Etat_actuel'] : '' ?>">
+				<input type="text" name="et" required="required" class="form-control" value="<?php echo htmlentities(isset($infosbook['Etat_actuel']) ? $infosbook['Etat_actuel'] : '') ?>">
 			</div>
 			<div>
 				<label>Appartenance</label>
-				<input type="radio" name="appart" value="Bibliothèque" class="radio-inline" <?php echo isset($infosbook['Bibli_media']) &&  $infosbook['Bibli_media'] === 'Bibliothèque' ? 'checked' : '' ?> >Bibliothèque
-				<input type="radio" name="appart" value="Médiathèque" class="radio-inline" <?php echo isset($infosbook['Bibli_media']) &&  $infosbook['Bibli_media'] === 'Médiathèque' ? 'checked' : '' ?>>Médiathèque
+				<input type="radio" name="appart" value="Bibliothèque" class="radio-inline" <?php echo htmlentities(isset($infosbook['Bibli_media']) &&  $infosbook['Bibli_media'] === 'Bibliothèque' ? 'checked' : '') ?> >Bibliothèque
+				<input type="radio" name="appart" value="Médiathèque" class="radio-inline" <?php echo htmlentities(isset($infosbook['Bibli_media']) &&  $infosbook['Bibli_media'] === 'Médiathèque' ? 'checked' : '') ?>>Médiathèque
 			</div>
 
 			<?php if(empty($infosbook)) : ?>
