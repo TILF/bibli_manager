@@ -1,19 +1,6 @@
 <?php
 	include_once('./bddacces.php');
 
-	// Idem tu passes des paramètres dans ta fonction que tu n'utilise pas et tu reprends $_POST. Il faut généraliser la fonction en ne prenant pas $_POST ici !
-	// Donne des noms explicite a tes fonctions et à tes variables. Quand tu auras plusieurs 10aines de pages et qu'il faudra faire de la maintenance tu perdra beaucoup de temps a esseyer de comprendre ce que chacune fait
-/*	function myAss4($ii , $hip){
-
-		$bd = bd_connect();
-		$ii = mysqli_real_escape_string($bd , $_POST['ii']);
-		$ip = mysqli_real_escape_string($bd , $_POST['ip']);
-		$hip = password_hash($ip, PASSWORD_BCRYPT);
-		$sql = "INSERT INTO users (ident , pwd) VALUES ('$ii' , '$hip')";
-		$res = mysqli_query($bd, $sql) or bd_erreur($bd, $sql);
-		mysqli_close($bd);
-	}*/
-
 	function insertUsr($ident , $pwd){
 
 		$bd = bd_connect();

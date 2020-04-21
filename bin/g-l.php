@@ -14,20 +14,6 @@
 		header('Location: Bibli.php');
 	}
 
-	if (isset($_POST['valid-btn'])&& $_POST['valid-btn'] === 'ajouter' || 'modif' || 'supp') {
-			if ((!empty($_POST['refe'])) && (!empty($_POST['tl'])) && (!empty($_POST['au'])) && (!empty($_POST['ap'])) && (!empty($_POST['emp'])) && (!empty($_POST['et'])) && (!empty($_POST['exem'])) && (!empty($_POST['appart']))) {
-
-				$refe = protection($_POST['refe']);
-				$tl = protection($_POST['tl']);
-				$au = protection($_POST['au']);
-				$ap = protection($_POST['ap']);
-				$emp = protection($_POST['emp']);
-				$et = protection($_POST['et']);
-				$exem = protection($_POST['exem']);
-				$appart = protection($_POST['appart']);
-			}
-	}
-
 
 	$book = get_allbooks();
 
@@ -73,14 +59,14 @@
 		<tbody>
 			<?php while($b = mysqli_fetch_assoc($book)) { ?>
 				<tr>
-					<td><?php echo $b['Reference']; ?></td>
-					<td><?php echo $b['Titre']; ?></td>
-					<td><?php echo $b['Auteur']; ?></td>
-					<td><?php echo $b['Annee_parution']; ?></td>
-					<td><?php echo $b['Emplacement']; ?></td>
-					<td><?php echo $b['Etat_actuel']; ?></td>
-					<td><?php echo $b['Exemplaires']; ?></td>
-					<td><?php echo $b['Bibli_media']; ?></td>
+					<td><?php echo htmlentities($b['Reference']); ?></td>
+					<td><?php echo htmlentities($b['Titre']); ?></td>
+					<td><?php echo htmlentities($b['Auteur']); ?></td>
+					<td><?php echo htmlentities($b['Annee_parution']); ?></td>
+					<td><?php echo htmlentities($b['Emplacement']); ?></td>
+					<td><?php echo htmlentities($b['Etat_actuel']); ?></td>
+					<td><?php echo htmlentities($b['Exemplaires']); ?></td>
+					<td><?php echo htmlentities($b['Bibli_media']); ?></td>
 					<td><a href="g-l.php?fkLivres=<?php echo $b['Reference']; ?>" class="btn btn-info"><i class="fas fa-user-edit"></i> Modifier</a></td>
 				</tr>
 			<?php } ?>

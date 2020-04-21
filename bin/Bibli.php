@@ -38,18 +38,6 @@
 		
 	}
 
-/*	
-	La fonction verif Co était défini deux fois dans deux fichiers différents ! utilisateurs.php => Copie de funt.php ? La page est inutile et à supprimer. De plus elle n'a rien a faire dans le dossier BDD réservé aux fonction qui intérrogent la base de donnée.
-
-	D'autre part tu envoie des parmètres à tes fonction mais tu ne t'en sert jamais tu reprends les valeurs directement dans POST (voir commentaire dans users.php)
-	Les requêtes SQL sont a privilégier dans les pages dédiées du dossier BDD ca évite d'en avoir partout et de mieux se repérer.
-
-	Les fichiers dans BDD relfete les tables de la DBB il faut les nommer du même nom que les tables sur lesquels les fonction agissent. Il ne faut pas créer de addUser.php mais un user.php dans lequel on va mettre toutes les fonctions 
-
-	if ((isset($_POST['cxn'])) && $_POST['cxn'] === 'cxn') {
-		verifco($_POST['ident'], $_POST['pwd']);
-	}
-*/
 
 	/* #################################################################################################
 									AFFICHAGES

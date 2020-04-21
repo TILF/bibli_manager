@@ -36,6 +36,7 @@ include_once('./bddacces.php');
 	function get_bookbyauteur($au){
 
 		$bd = bd_connect();
+		$au =  mysqli_real_escape_string($bd , $au);
 		$sql = "SELECT * FROM livres WHERE  Auteur = '$au'";
 		$res = mysqli_query($bd , $sql) or bd_erreur($bd , $sql);
 		$book = mysqli_fetch_assoc($res);
@@ -50,6 +51,7 @@ include_once('./bddacces.php');
 	function get_bookbytitre($tl){
 
 		$bd = bd_connect();
+		$tl = mysqli_real_escape_string($bd , $tl);
 		$sql = "SELECT * FROM livres WHERE Titre = '$tl'";
 		$res = mysqli_query($bd , $sql) or bd_erreur($bd , $sql);
 		$book = mysqli_fetch_assoc($res);
@@ -60,6 +62,7 @@ include_once('./bddacces.php');
 	function get_bookbyrefe($refe){
 
 		$bd = bd_connect();
+		$refe = mysqli_real_escape_string($bd , $refe);
 		$sql = "SELECT * FROM livres WHERE Reference = '$refe'";
 		$res = mysqli_query($bd, $sql) or bd_erreur($bd , $sql);
 		$book = mysqli_fetch_assoc($res);
@@ -81,6 +84,14 @@ include_once('./bddacces.php');
 	function addbook($refe , $tl , $au , $ap , $emp , $et , $exem , $appart){
 		//die('ok');
 		$bd = bd_connect();
+		$refe = mysqli_real_escape_string($bd , $refe);
+		$tl = mysqli_real_escape_string($bd , $tl);
+		$au = mysqli_real_escape_string($bd , $au);
+		$ap = mysqli_real_escape_string($bd , $ap);
+		$emp = mysqli_real_escape_string($bd , $emp);
+		$et = mysqli_real_escape_string($bd , $et);
+		$exem = mysqli_real_escape_string($bd , $exem);
+		$appart = mysqli_real_escape_string($bd , $appart);
 		$sql = "INSERT INTO livres (Reference , Titre , Auteur , Annee_parution , Emplacement , Etat_actuel , Exemplaires , Bibli_media) 
 				VALUES ('$refe' , '$tl' , '$au' , '$ap' , '$emp' , '$et' , '$exem' , '$appart')";
 		$res = mysqli_query($bd, $sql) or bd_erreur($bd, $sql);
@@ -95,6 +106,8 @@ include_once('./bddacces.php');
 	function updatebook($exem, $refe){
 
 		$bd = bd_connect();
+		$exem = mysqli_real_escape_string($bd , $exem);
+		$refe = mysqli_real_escape_string($bd , $refe);
 		$sql = "UPDATE livres
 				SET  Exemplaires = '$exem'
 				WHERE Reference = '$refe'";
@@ -107,6 +120,7 @@ include_once('./bddacces.php');
 	function removebook($refe){
 
 		$bd = bd_connect();
+		$refe = mysqli_real_escape_string($bd , $refe);
 		$sql = "DELETE FROM livres WHERE Reference = '$refe'";
 		$res = mysqli_query($bd , $sql) or bd_erreur($bd , $sql);
 		mysqli_close($bd);
