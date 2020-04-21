@@ -22,6 +22,7 @@
 	function getAdherentById($fkAdherent){
 
 		$bd = bd_connect();
+		$fkAdhérent =  mysqli_real_escape_string($bd , $fkAdhérent);
 		$sql = "SELECT * FROM adherents WHERE Id = " . intval($fkAdherent);
 		$res = mysqli_query($bd, $sql) or bd_erreur($bd, $sql);
 		$adh = mysqli_fetch_assoc($res);
@@ -42,6 +43,13 @@
 	 */
 	function insertAdherent($nom, $prenom, $age, $tel, $nrue, $zcode, $vi){
 		$bd = bd_connect();
+		$nom =  mysqli_real_escape_string($bd , $nom);
+		$pnom =  mysqli_real_escape_string($bd , $pnom);
+		$age =  mysqli_real_escape_string($bd , $age);
+		$tel =  mysqli_real_escape_string($bd , $tel);
+		$nrue =  mysqli_real_escape_string($bd , $nrue);
+		$zcode =  mysqli_real_escape_string($bd , $zcode);
+		$vi =  mysqli_real_escape_string($bd , $vi);
 		$sql = "INSERT INTO adherents (Nom,Prenom,Age,Adresse,Telephone,Cotisation,dateFin,Ville, CP)
 				 VALUES ('$nom', '$prenom', $age, '$nrue', '$tel', 'Oui', NULL, '$vi',  $zcode) ";
 		$res = mysqli_query($bd, $sql) or bd_erreur($bd, $sql);
@@ -59,8 +67,16 @@
 	 * @param  [STR] $vi     		[Ville]
 	 * @param  [INT] $fkAdhérent 	[Id de l'adhérent à modifier]
 	 */
-	function updateAdherent($nom, $prenom, $age, $tel, $nrue, $zcode, $vi, $fkAdhérent){
+	function updateAdherent($nom, $pnom, $age, $tel, $nrue, $zcode, $vi, $fkAdhérent){
 		$bd = bd_connect();
+		$nom =  mysqli_real_escape_string($bd , $nom);
+		$pnom =  mysqli_real_escape_string($bd , $pnom);
+		$age =  mysqli_real_escape_string($bd , $age);
+		$tel =  mysqli_real_escape_string($bd , $tel);
+		$nrue =  mysqli_real_escape_string($bd , $nrue);
+		$zcode =  mysqli_real_escape_string($bd , $zcode);
+		$vi =  mysqli_real_escape_string($bd , $vi);
+		$fkAdhérent =  mysqli_real_escape_string($bd , $fkAdhérent);
 		$sql  ="UPDATE adherents 
 				SET Nom = '$nom',
 				 Prenom = '$prenom',
@@ -81,6 +97,8 @@
 	 */
 	function deleteAdherent($date, $fkAdhérent){
 		$bd = bd_connect();
+		$date =  mysqli_real_escape_string($bd , $date);
+		$fkAdhérent =  mysqli_real_escape_string($bd , $fkAdhérent);
 		$sql = "UPDATE adherents SET dateFin = '$date'
 				WHERE Id = $fkAdhérent";
 		$res = mysqli_query($bd, $sql) or bd_erreur($bd, $sql);
@@ -89,6 +107,7 @@
 
 	function get_adherentbypnom($pnom){
 		$bd = bd_connect();
+		$pnom =  mysqli_real_escape_string($pnom , $au);
 		$sql = "SELECT * FROM adherents WHERE Prenom = '$pnom'";
 		$res = mysqli_query($bd, $sql) or bd_erreur($bd, $sql);
 		mysqli_close($bd);
@@ -97,6 +116,7 @@
 
 	function get_adherentbynom($nom){
 		$bd = bd_connect();
+		$nom =  mysqli_real_escape_string($bd , $nom);
 		$sql = "SELECT * FROM adherents WHERE Nom = '$nom'";
 		$res = mysqli_query($bd, $sql) or bd_erreur($bd, $sql);
 		mysqli_close($bd);

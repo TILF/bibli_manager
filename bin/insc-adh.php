@@ -17,18 +17,6 @@
 		header('Location: Bibli.php');
 	}
 
-	if (isset($_POST['valid-btn'])&& $_POST['valid-btn'] === 'inscript') {
-			if ((!empty($_POST['nom'])) && (!empty($_POST['pnom'])) && (!empty($_POST['age'])) && (!empty($_POST['tel'])) && (!empty($_POST['nrue'])) && (!empty($_POST['zcode'])) && (!empty($_POST['vi']))) {
-
-				$nom = protection($_POST['nom']);
-				$pnom = protection($_POST['pnom']);
-				$age = protection($_POST['age']);
-				$tel = protection($_POST['tel']);
-				$nrue = protection($_POST['nrue']);
-				$zcode = protection($_POST['zcode']);
-				$vi = protection($_POST['vie']);
-			}
-	}
 	// On Regarde le bouton qui a forcé l'arrivée sur la page pour savoir quelle action réaliser
 	// Ensuite on fait le traitement et on force le rechargement de la page
 	// -----------------------------------  Si le bouton d'arrivé est une inscription -----------------------
@@ -79,14 +67,14 @@
 		<tbody>
 			<?php while($t = mysqli_fetch_assoc($adh)) { ?>
 				<tr>
-					<td><?php echo $t['Id']; ?></td>
-					<td><?php echo $t['Nom']; ?></td>
-					<td><?php echo $t['Prenom']; ?></td>
-					<td><?php echo $t['Age']; ?></td>
-					<td>(+33)<?php echo $t['Telephone']; ?></td>
-					<td><?php echo $t['Adresse']; ?></td>
-					<td><?php echo $t['CP'] . " " . $t['Ville']; ?></td>
-					<td><?php echo $t['Cotisation']; ?></td>
+					<td><?php echo htmlentities($t['Id']); ?></td>
+					<td><?php echo htmlentities($t['Nom']); ?></td>
+					<td><?php echo htmlentities($t['Prenom']); ?></td>
+					<td><?php echo htmlentities($t['Age']); ?></td>
+					<td>(+33)<?php echo htmlentities($t['Telephone']); ?></td>
+					<td><?php echo htmlentities($t['Adresse']); ?></td>
+					<td><?php echo htmlentities($t['CP'] . " " . $t['Ville']); ?></td>
+					<td><?php echo htmlentities($t['Cotisation']); ?></td>
 					<td><a href="insc-adh.php?fkAdherent=<?php echo $t['Id']; ?>" class="btn btn-info"><i class="fas fa-user-edit"></i> Modifier</a></td>
 				</tr>
 			<?php } ?>
