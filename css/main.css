@@ -4,24 +4,28 @@ body, html{
 }
 
 body{
+	color: #000 ;
 	display: flex;
 	flex-direction: column;
 	background-image: url(../images/machina.jpg);
   	background-size: cover;	
 }
-#ContentTest{background-color: #fff; padding: 1em 0.5em 2em 0.5em;}
+#ContentTest{
+	background-color: #d1c6c2; padding: 1em 0.5em 2em 0.5em;
+	opacity: 0.8;
+}
 
 /* --------------  Fonts and Colors ----------------- */
 
 
 h1{
-	color:#b56719;
+	color:#47291f;
 	font-size: 30px;
 	border-bottom: solid 1px #b56719;
 }
 
 h3{
-	color : #2063c7;
+	color : #243259;
 }
 
 /* --------------- Blocs Page ---------------------- */
@@ -40,6 +44,7 @@ h3{
 .row > button{
 	margin: 0 0.5em;
 }
+
 
 
 

@@ -1,13 +1,16 @@
 <?php
 
-function reserver(){
+include_once('bddacces.php');
+
+function reserver($date_d , $date_f , $id_livre , $id_adh){
 	
-	$bd = bd_connect():
-	$sql = "INSERT INTO emprunts_livres (Date_debut , Date_fin , Livres_fk , Adherents_fk , Date_rendu , Etat , Rendu) 
-	VALUES($date_d , $date_f , (
-	SELECT Reference FROM Livres WHERE Titre = $livre ),
-	(SELECT Id FROM Adherents WHERE Nom = $nom),
-	$date_r , $etat , $rendu)";
+	$bd = bd_connect();
+	$date_d = mysqli_real_escape_string($bd , $date_d);
+	$date_f = mysqli_real_escape_string($bd , $date_f);
+	$id_livre = mysqli_real_escape_string($bd , $livre);
+	$id_adh = mysqli_real_escape_string($bd , $nom);
+	$sql = "INSERT INTO emprunts_livres (Date_debut , Date_fin , Livres_fk , Adherents_fk) 
+	VALUES ('$date-d' , '$date_f', '$livre' , '$nom')";
 	$res = mysqli_query ($bd , $sql) or mysqli_error($bd , $sql);
 	mysqli_close($bd);
 }
@@ -15,7 +18,7 @@ function reserver(){
 function reservation_courante(){
 
 	$bd = bd_connect();
-	$sql = "SELECT * FROM emprunts_livres WHERE Rendu IS NULL"; 
+	$sql = "SELECT * FROM emprunts_livres WHERE Date_rendu IS NULL"; 
 	$res = mysqli_query ($bd , $sql) or mysqli_error($bd , $sql);
 	mysqli_close($bd);
 	return $res;
@@ -24,7 +27,7 @@ function reservation_courante(){
 function reservation_retard(){
 
 	$bd = bd_connect();
-	$sql = "SELECT * FROM emprunts_livres WHERE Date_rendu IS NULL AND Rendu IS NULL";
+	$sql = "SELECT * FROM emprunts_livres WHERE Date_rendu IS NULL AND CURRDATE() > date_fin";
 	$res = mysqli_query ($bd , $sql) or mysqli_error($bd , $sql);
 	mysqli_close($bd);
 	return $res;
@@ -33,12 +36,12 @@ function reservation_retard(){
 function update_location(){
 
 	$bd = bd_connect();
+	$date_r = mysqli_real_escape_string($bd , $date_r);
+	$etat = mysqli_real_escape_string($bd , $etat);
 	$sql = "UPDATE emprunts_livres
-			SET Date_fin = $date_f
-				Date_rendu = $date_r
+			SET Date_rendu = $date_r
 				Etat = $etat
-				Rendu = $rendu
-			WHERE (SELECT Reference FROM livres WHERE Titre = $livre)";
+			WHERE Id_emprunts = fkemprunts_livres";
 	$res = mysqli_query ($bd , $sql) or mysqli_error($bd , $sql);
 	mysqli_close($bd);
 }
@@ -46,7 +49,7 @@ function update_location(){
 function historique(){
 
 	$bd = bd_connect();
-	$sql = "SELECT * FROM emprunts_livres WHERE Date_fin IS NOT NULL AND Date_rendu IS NOT NULL
+	$sql = "SELECT * FROM emprunts_livres WHERE Date_rendu IS NOT NULL
 			ORDER BY Date_rendu DESC";
 	$res = mysqli_query ($bd , $sql) or mysqli_error($bd , $sql);
 	mysqli_close($bd);

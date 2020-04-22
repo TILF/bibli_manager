@@ -18,6 +18,7 @@
 
 ?>
 <div id="Accueillant">
+	<div id="ContentTest" class="container">
 	A venir
 </div>
 <title>Accueil</title>

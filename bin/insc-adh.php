@@ -46,6 +46,7 @@
 
 
 <div id="contentPage">
+	<div id="ContentTest" class="container">
 
 	<!--------------------------- Tableau des adhérents ----------------------------------------->
 	<h1>Gestion des adhérents</h1>
