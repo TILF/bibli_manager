@@ -16,9 +16,13 @@
 		header('Location: Bibli.php');
 	}
 
-	$date_d = date("Y-m-d");
-	$date_f = date("Y-m-d");
-	$date_r = date("Y-m-d");
+
+	$date_d = DateStringToDb($_POST['date_d']);
+	$date_f = DateStringToDb($_POST['date_f']);
+	$livre = $_POST['id_livre'];
+	$nom = $_POST['idAdh'];
+
+
 	// On Regarde le bouton qui a forcé l'arrivée sur la page pour savoir quelle action réaliser
 	// Ensuite on fait le traitement et on force le rechargement de la page
 	// -----------------------------------  Si le bouton d'arrivé est une inscription -----------------------

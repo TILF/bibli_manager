@@ -59,6 +59,17 @@ function protection($data){
 }
 
 
+/* ----- Formatage des dates ------- */
+function DateStringToDb($date){
+  $tab = explode('-', $date);
+  return $tab[0].$tab[1].$tab[2];
+}
+
+function DateDbToString($date){
+  return substr($date,0, 4).'-'.substr($date, 4, 2).'-'.substr($date, 6, 2);
+}
+
+
 
 /*###########################################################################################################
                                       FONCTION D'AFFICHAGE DES PAGES

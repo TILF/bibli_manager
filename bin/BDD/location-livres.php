@@ -11,7 +11,7 @@ function reserver($date_d , $date_f , $id_livre , $id_adh){
 	$id_adh = mysqli_real_escape_string($bd , $nom);
 	$sql = "INSERT INTO emprunts_livres (Date_debut , Date_fin , Livres_fk , Adherents_fk) 
 	VALUES ('$date-d' , '$date_f', '$livre' , '$nom')";
-	$res = mysqli_query ($bd , $sql) or mysqli_error($bd , $sql);
+	$res = mysqli_query ($bd , $sql) or bd_erreur($bd , $sql);
 	mysqli_close($bd);
 }
 
@@ -19,7 +19,7 @@ function reservation_courante(){
 
 	$bd = bd_connect();
 	$sql = "SELECT * FROM emprunts_livres WHERE Date_rendu IS NULL"; 
-	$res = mysqli_query ($bd , $sql) or mysqli_error($bd , $sql);
+	$res = mysqli_query ($bd , $sql) or bd_erreur($bd , $sql);
 	mysqli_close($bd);
 	return $res;
 }
@@ -28,7 +28,7 @@ function reservation_retard(){
 
 	$bd = bd_connect();
 	$sql = "SELECT * FROM emprunts_livres WHERE Date_rendu IS NULL AND CURRDATE() > date_fin";
-	$res = mysqli_query ($bd , $sql) or mysqli_error($bd , $sql);
+	$res = mysqli_query ($bd , $sql) or bd_erreur($bd , $sql);
 	mysqli_close($bd);
 	return $res;
 }
@@ -42,7 +42,7 @@ function update_location(){
 			SET Date_rendu = $date_r
 				Etat = $etat
 			WHERE Id_emprunts = fkemprunts_livres";
-	$res = mysqli_query ($bd , $sql) or mysqli_error($bd , $sql);
+	$res = mysqli_query ($bd , $sql) or bd_erreur($bd , $sql);
 	mysqli_close($bd);
 }
 
@@ -51,7 +51,7 @@ function historique(){
 	$bd = bd_connect();
 	$sql = "SELECT * FROM emprunts_livres WHERE Date_rendu IS NOT NULL
 			ORDER BY Date_rendu DESC";
-	$res = mysqli_query ($bd , $sql) or mysqli_error($bd , $sql);
+	$res = mysqli_query ($bd , $sql) or bd_erreur($bd , $sql);
 	mysqli_close($bd);
 	return $res;
 }
