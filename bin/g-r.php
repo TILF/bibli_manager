@@ -49,7 +49,6 @@
 				<input type="hidden" name="Idlocation" value="<?php echo htmlentities($infosloc['Id_emprunt']) ?>">
 			<?php endif; ?>
 
-			<input type="hidden"  name="refLivre" id="refLivre" value="">
 			<input type="hidden"  name="idAdh" id="idAdh" value="">
 
 			<div class="row">
@@ -133,24 +132,10 @@
 	        });
 	    },
 	    updater: function (item) {
-	    	searchBookInfos(item);
 	    	return item;
 	    },
 	    minLength: 2
     });
-	// Recherche de la référence et insertion dans l'input
-    function searchBookInfos(item){
-    	 $.ajax({
-            url: './BDD/ajax_book.php',
-            type: 'post',
-            dataType: 'json',
-            data: { pattern: item, demand: 'fullInfos' },
-            success: function (jsonResult) {
-            	$('#refLivre').val(jsonResult.Reference);
-            }
-        });
-    }
-
 
     // IDM au dessus mais avec l'adhérent
 	$('#searchAdherent').typeahead({
