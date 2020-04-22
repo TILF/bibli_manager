@@ -28,6 +28,7 @@
 	// Ensuite on fait le traitement et on force le rechargement de la page
 	// -----------------------------------  Si le bouton d'arrivé est une inscription -----------------------
 	if(isset($_POST['valid-btn']) && $_POST['valid-btn'] === 'reserver'){
+		die(var_dump(array($date_d, $date_f , $id_livre , $id_adh)));
 		reserver($date_d, $date_f , $id_livre , $id_adh);
 		header('Location:g-r.php');
 	}  
@@ -204,7 +205,7 @@
             dataType: 'json',
             data: { pattern: item, demand: 'fullInfos' },
             success: function (jsonResult) {
-            	$('#idAdh').val(jsonResult.Id);
+            	$('#id_Adh').val(jsonResult.Id);
             }
         });
     }
