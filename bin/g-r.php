@@ -16,11 +16,12 @@
 		header('Location: Bibli.php');
 	}
 
-
-	$date_d = DateStringToDb($_POST['date_d']);
-	$date_f = DateStringToDb($_POST['date_f']);
-	$livre = $_POST['id_livre'];
-	$nom = $_POST['idAdh'];
+	if(isset($_POST['date_d'])){
+		$date_d = DateStringToDb($_POST['date_d']);
+		$date_f = DateStringToDb($_POST['date_f']);
+		$livre = $_POST['id_livre'];
+		$nom = $_POST['idAdh'];
+	}
 
 
 	// On Regarde le bouton qui a forcé l'arrivée sur la page pour savoir quelle action réaliser
@@ -90,11 +91,12 @@
 			<div class="row">
 				<div class="form-group col-md-3">
 					<label>Date de début</label>
-					<input type="date" name="date_d" required="required" class="form-control input-sm" value="<?php echo htmlentities(!empty($infosloc) ? $infosloc['Date_debut'] : ''); ?>">
+					<input type="date" name="date_d" required="required" class="form-control input-sm" value="<?php echo htmlentities(!empty($infosloc) ? $infosloc['Date_debut'] : date('Y-m-d')); ?>">
 				</div>
 				<div class="form-group col-md-3">
 					<label>Date de fin</label>
-					<input type="date" name="date_f" required="required" class="form-control input-sm" value="<?php echo htmlentities(!empty($infosloc) ? $infosloc['Date_fin'] : ''); ?>">
+					<input type="date" name="date_f" required="required" class="form-control input-sm" value="<?php echo htmlentities(!empty($infosloc) ? $infosloc['Date_fin'] : 
+					date('Y-m-d', strtotime(date('Y-m-d') . '+1 days'))); ?>">
 				</div>
 				<div class="form-group col-md-3">
 					<label>ID Livre</label>
