@@ -19,8 +19,8 @@
 	if(isset($_POST['date_d'])){
 		$date_d = DateStringToDb($_POST['date_d']);
 		$date_f = DateStringToDb($_POST['date_f']);
-		$livre = $_POST['id_livre'];
-		$nom = $_POST['idAdh'];
+		$id_livre = $_POST['id_livre'];
+		$id_adh = $_POST['id_Adh'];
 	}
 
 
@@ -28,7 +28,7 @@
 	// Ensuite on fait le traitement et on force le rechargement de la page
 	// -----------------------------------  Si le bouton d'arrivé est une inscription -----------------------
 	if(isset($_POST['valid-btn']) && $_POST['valid-btn'] === 'reserver'){
-		reserver($date_d, $date_f, $livre, $nom);
+		reserver($date_d, $date_f , $id_livre , $id_adh);
 		header('Location:g-r.php');
 	}  
 	// --------------------------------- Si c'est une modification d'un existant -------------------------
@@ -86,7 +86,7 @@
 				<input type="hidden" name="Idlocation" value="<?php echo htmlentities($infosloc['Id_emprunt']) ?>">
 			<?php endif; ?>
 
-			<input type="hidden"  name="idAdh" id="idAdh" value="">
+			<input type="hidden"  name="id_Adh" id="id_Adh" value="">
 
 			<div class="row">
 				<div class="form-group col-md-3">
@@ -96,14 +96,14 @@
 				<div class="form-group col-md-3">
 					<label>Date de fin</label>
 					<input type="date" name="date_f" required="required" class="form-control input-sm" value="<?php echo htmlentities(!empty($infosloc) ? $infosloc['Date_fin'] : 
-					date('Y-m-d', strtotime(date('Y-m-d') . '+1 days'))); ?>">
+					date('Y-m-d', strtotime(date('Y-m-d') . '+21 days'))); ?>">
 				</div>
 				<div class="form-group col-md-3">
 					<label>ID Livre</label>
 					<input type="text" id="searchBook" name="id_livre" required="required" class="form-control input-sm" value="<?php echo htmlentities(!empty($infosloc) ? $infosloc['fk_Livres'] : ''); ?>">
 				</div>
 				<div class="form-group col-md-3">
-					<label>ID Adhérent</label>
+					<label>Nom Adhérent</label>
 					<input type="text" name="id_adh" id="searchAdherent" required="required" class="form-control input-sm" value="<?php echo htmlentities(!empty($infosloc) ? $infosloc['fk_adherents'] : ''); ?>">
 				</div>
 			</div>

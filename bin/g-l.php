@@ -77,7 +77,7 @@
 			</tbody>
 		</table>
 		
-		<form action="g-l.php col-md-12" method="post" >
+		<form action="g-l.php" classe="col-md-12" method="post" >
 
 			<!-- Si c'est vide c'est une inscription, sinon c'est une modification et on garde l'Id de la personne dans un champ caché -->
 			<?php if(empty($infosbook)) : ?>

@@ -7,10 +7,10 @@ function reserver($date_d , $date_f , $id_livre , $id_adh){
 	$bd = bd_connect();
 	$date_d = mysqli_real_escape_string($bd , $date_d);
 	$date_f = mysqli_real_escape_string($bd , $date_f);
-	$id_livre = mysqli_real_escape_string($bd , $livre);
-	$id_adh = mysqli_real_escape_string($bd , $nom);
+	$id_livre = mysqli_real_escape_string($bd , $id_livre);
+	$id_adh = mysqli_real_escape_string($bd , $id_adh);
 	$sql = "INSERT INTO emprunts_livres (Date_debut , Date_fin , Livres_fk , Adherents_fk) 
-	VALUES ('$date-d' , '$date_f', '$livre' , '$nom')";
+	VALUES ('$date_d' , '$date_f', '$id_livre' , '$id_adh')";
 	$res = mysqli_query ($bd , $sql) or bd_erreur($bd , $sql);
 	mysqli_close($bd);
 }
