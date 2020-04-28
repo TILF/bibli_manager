@@ -35,9 +35,11 @@ function update_location(){
 	$date_r = mysqli_real_escape_string($bd , $date_r);
 	$etat = mysqli_real_escape_string($bd , $etat);
 	$sql = "UPDATE emprunts_livres
+			INNER JOIN livres
+			ON emprunts_livres.Livres_fk = Livres.Reference
 			SET Date_rendu = $date_r
-				Etat = $etat
-			WHERE Id_emprunts = fkemprunts_livres";
+				Etat_actuel = $etat
+			WHERE Id_emprunts = " . intval($fkemprunts_livres);
 	$res = mysqli_query ($bd , $sql) or bd_erreur($bd , $sql);
 	mysqli_close($bd);
 }
