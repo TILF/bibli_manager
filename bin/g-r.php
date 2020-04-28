@@ -9,6 +9,7 @@
 	// Réupération de l'ensemble des réservations pour affichage sur la page
 	$re = reservation_courante();
 
+
 	if (isset($_SESSION['ident'])) {
 		$ident = $_SESSION['ident'];
 	}
@@ -28,8 +29,8 @@
 	// Ensuite on fait le traitement et on force le rechargement de la page
 	// -----------------------------------  Si le bouton d'arrivé est une inscription -----------------------
 	if(isset($_POST['valid-btn']) && $_POST['valid-btn'] === 'reserver'){
-		die(var_dump(array($date_d, $date_f , $id_livre , $id_adh)));
 		reserver($date_d, $date_f , $id_livre , $id_adh);
+		
 		header('Location:g-r.php');
 	}  
 	// --------------------------------- Si c'est une modification d'un existant -------------------------
@@ -51,6 +52,7 @@
 	<table class="table">
 		<thead>
 			<tr>
+				<th>Numéro de Réservation</th>
 				<th>Date de début</th>
 				<th>Date de fin</th>
 				<th>Livre</th>
@@ -64,13 +66,13 @@
 		<tbody>
 			<?php while($r = mysqli_fetch_assoc($re)) { ?>
 				<tr>
+					<td><?php echo htmlentities($r['Id_emprunt']); ?></td>
 					<td><?php echo htmlentities($r['Date_debut']); ?></td>
 					<td><?php echo htmlentities($r['Date_fin']); ?></td>
-					<td><?php echo htmlentities($r['fk_Livres.Titre']); ?></td>
-					<td><?php echo htmlentities($r['fk_adherents.Nom']); ?></td>
+					<td><?php echo htmlentities($r['Livres_fk']); ?></td>
+					<td><?php echo htmlentities($r['Adherents_fk']); ?></td>
 					<td><?php echo htmlentities($r['Date_rendu']); ?></td>
-					<td><?php echo htmlentities($r['Etat']); ?></td>
-					<td><a href="g-l.php?fkEmprunts_livres=<?php echo htmlentities($r['Id_emprunt']); ?>" class="btn btn-info"><i class="fas fa-user-edit"></i> Modifier</a></td>
+					<td><a href="g-r.php?fkEmprunts_livres=<?php echo htmlentities($r['Id_emprunt']); ?>" class="btn btn-info"><i class="fas fa-user-edit"></i> Mettre à jour</a></td>
 				</tr>
 			<?php } ?>
 		</tbody>
@@ -101,11 +103,11 @@
 				</div>
 				<div class="form-group col-md-3">
 					<label>ID Livre</label>
-					<input type="text" id="searchBook" name="id_livre" required="required" class="form-control input-sm" value="<?php echo htmlentities(!empty($infosloc) ? $infosloc['fk_Livres'] : ''); ?>">
+					<input type="text" id="searchBook" name="id_livre" required="required" class="form-control input-sm" value="<?php echo htmlentities(!empty($infosloc) ? $infosloc['Livres_fk'] : ''); ?>">
 				</div>
 				<div class="form-group col-md-3">
-					<label>Nom Adhérent</label>
-					<input type="text" name="id_adh" id="searchAdherent" required="required" class="form-control input-sm" value="<?php echo htmlentities(!empty($infosloc) ? $infosloc['fk_adherents'] : ''); ?>">
+					<label>Numéro Adhérent</label>
+					<input type="text" name="id_adh" id="searchAdherent" required="required" class="form-control input-sm" value="<?php echo htmlentities(!empty($infosloc) ? $infosloc['Adherents_fk'] : ''); ?>">
 				</div>
 			</div>
 			
@@ -124,7 +126,7 @@
 				</div >
 				<div class="form-group col-md-3">
 					<label>Etat</label>
-					<input type="text" name="etat" class="form-control input-sm" value="<?php echo htmlentities(!empty($infosloc) ? $infosloc['Etat'] : ''); ?>">
+					<input type="text" name="etat" class="form-control input-sm" value="<?php echo htmlentities(!empty($infosloc) ? $infosloc['Etat_actuel'] : ''); ?>">
 				</div>
 			</div>
 				<div class="row justify-content-center">

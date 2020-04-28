@@ -22,7 +22,7 @@
 	function getAdherentById($fkAdherent){
 
 		$bd = bd_connect();
-		$fkAdhérent =  mysqli_real_escape_string($bd , $fkAdhérent);
+		$fkAdherent =  mysqli_real_escape_string($bd , $fkAdherent);
 		$sql = "SELECT * FROM adherents WHERE Id = " . intval($fkAdherent);
 		$res = mysqli_query($bd, $sql) or bd_erreur($bd, $sql);
 		$adh = mysqli_fetch_assoc($res);
