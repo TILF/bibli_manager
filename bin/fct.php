@@ -66,7 +66,7 @@ function DateStringToDb($date){
 }
 
 function DateDbToString($date){
-  return substr($date,0, 4).'-'.substr($date, 4, 2).'-'.substr($date, 6, 2);
+  return substr($date,8, 10).'-'.substr($date, 5, 7).'-'. substr($date, 0, 4);
 }
 
 

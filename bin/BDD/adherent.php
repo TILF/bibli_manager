@@ -105,6 +105,10 @@
 		mysqli_close($bd);
 	}
 
+/**
+	 * Récupération de d'adhérents selon le prénom
+	 * @return ARRAY Données extraites de la BDD
+	 */
 	function get_adherentbypnom($pnom){
 		$bd = bd_connect();
 		$pnom =  mysqli_real_escape_string($pnom , $au);
@@ -114,6 +118,10 @@
 		return $res;
 	}
 
+/**
+	 * Récupération d'adhérents selon le nom
+	 * @return ARRAY Données extraites de la BDD
+	 */
 	function get_adherentbynom($nom){
 		$bd = bd_connect();
 		$nom =  mysqli_real_escape_string($bd , $nom);

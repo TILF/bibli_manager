@@ -54,7 +54,6 @@
 					<th>Année de parution</th>
 					<th>Emplacement</th>
 					<th>Etat actuel</th>
-					<th>Exemplaires</th>
 					<th>Appartenance</th>
 					<th>Modifer</th>
 				</tr>
@@ -69,7 +68,6 @@
 						<td><?php echo htmlentities($b['Annee_parution']); ?></td>
 						<td><?php echo htmlentities($b['Emplacement']); ?></td>
 						<td><?php echo htmlentities($b['Etat_actuel']); ?></td>
-						<td><?php echo htmlentities($b['Exemplaires']); ?></td>
 						<td><?php echo htmlentities($b['Bibli_media']); ?></td>
 						<td><a href="g-l.php?fkLivres=<?php echo htmlentities($b['Reference']); ?>" class="btn btn-info">Modifier</a></td>
 					</tr>
@@ -106,10 +104,6 @@
 			<div>
 				<label>Emplacement</label>
 				<input type="text" name="emp" required="required" class="form-control input-sm" value="<?php echo htmlentities(isset($infosbook['Emplacement']) ? $infosbook['Emplacement'] : '') ?>">
-			</div>
-			<div>
-				<label for="sel1">Exemplaires</label>
-				<input type="number" name="exem" required="required" class="form-control input-sm" value="<?php echo htmlentities(isset($infosbook['Exemplaires']) ? $infosbook['Exemplaires'] : '') ?>">
 			</div>
 			<div>
 				<label>Etat</label>

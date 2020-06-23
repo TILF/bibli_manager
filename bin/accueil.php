@@ -10,7 +10,7 @@
 	include_once('./BDD/location-livres.php');
 
 	$accueil = getreservationAccueil();
-	$retard = getreservationRetard();
+	$retard = getreservationRetard(); //
 
 	if (isset($_SESSION['ident'])) {
 		$ident = $_SESSION['ident'];
@@ -87,5 +87,7 @@
 					</tbody>
 				</table>
 			</div>
+
+			<div>
 	</div>
 <?php pageEnd(); ?>

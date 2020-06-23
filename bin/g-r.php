@@ -59,6 +59,7 @@
 				<th>Adhérent</th>
 				<th>Date de rendu</th>
 				<th>Etat</th>
+				<th>Livraison</th>
 				<th>Modifier</th>
 			</tr>
 		</thead>
@@ -67,11 +68,13 @@
 			<?php while($r = mysqli_fetch_assoc($re)) { ?>
 				<tr>
 					<td><?php echo htmlentities($r['Id_emprunt']); ?></td>
-					<td><?php echo htmlentities($r['Date_debut']); ?></td>
-					<td><?php echo htmlentities($r['Date_fin']); ?></td>
-					<td><?php echo htmlentities($r['Livres_fk']); ?></td>
+					<td><?php echo htmlentities(DateDbToString($r['Date_debut'])); ?></td>
+					<td><?php echo htmlentities(DateDbToString($r['Date_fin'])); ?></td>
+					<td><?php echo htmlentities($r['Reference']); ?></td>
 					<td><?php echo htmlentities($r['Adherents_fk']); ?></td>
 					<td><?php echo htmlentities($r['Date_rendu']); ?></td>
+					<td><?php echo htmlentities($r['etat_actuel']); ?></td>
+					<td><?php echo htmlentities($r['livrage']); ?></td>
 					<td><a href="g-r.php?fkEmprunts_livres=<?php echo htmlentities($r['Id_emprunt']); ?>" class="btn btn-info"><i class="fas fa-user-edit"></i> Mettre à jour</a></td>
 				</tr>
 			<?php } ?>

@@ -59,6 +59,10 @@ include_once('./bddacces.php');
 		return $book;
 	}
 
+/**
+	 * Récupération de livres selon la référence
+	 * @return ARRAY Données extraites de la BDD
+	 */
 	function get_bookbyrefe($refe){
 
 		$bd = bd_connect();

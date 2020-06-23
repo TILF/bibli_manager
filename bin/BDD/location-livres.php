@@ -16,7 +16,19 @@ function reserver($date_d , $date_f , $id_livre , $id_adh){
 
 function reservation_courante(){
 	$bd = bd_connect();
-	$sql = "SELECT * FROM emprunts_livres WHERE Date_rendu IS NULL"; 
+	$sql = "SELECT
+			Id_emprunt ,
+			Date_debut ,
+			Date_fin ,
+			Reference ,
+			Adherents_fk ,
+			Date_rendu ,
+			etat_actuel ,
+			livrage
+			FROM emprunts_livres
+			INNER JOIN livres
+				ON emprunts_livres.Livres_fk = Livres.reference
+	 		WHERE Date_rendu IS NULL"; 
 	$res = mysqli_query ($bd , $sql) or bd_erreur($bd , $sql);
 	mysqli_close($bd);
 	return $res;
@@ -24,7 +36,20 @@ function reservation_courante(){
 
 function getreservationRetard(){
 	$bd = bd_connect();
-	$sql = "SELECT * FROM emprunts_livres WHERE Date_fin < NOW()";
+	$sql = "SELECT 
+			Id_emprunt ,
+			Date_debut ,
+			Date_fin ,
+			Reference ,
+			Titre ,
+			Prenom ,
+			Nom 
+			FROM emprunts_livres
+				INNER JOIN livres
+					ON emprunts_livres.Livres_fk = Livres.Reference
+				INNER JOIN adherents
+					ON emprunts_livres.Adherents_fk = Adherents.Id
+			WHERE Date_fin < NOW()";
 	$res = mysqli_query ($bd , $sql) or bd_erreur($bd , $sql);
 	mysqli_close($bd);
 	return $res;
@@ -65,6 +90,7 @@ function getReservationById($fkemprunts_livres){
 	$bd = bd_connect();
 	$fkemprunts_livres =  mysqli_real_escape_string($bd , $fkemprunts_livres);
 	$sql = "SELECT
+			Id_emprunt ,
 			Date_debut ,
 			Date_fin , 
 			Livres_fk ,
