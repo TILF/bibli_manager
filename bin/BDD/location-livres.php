@@ -64,7 +64,7 @@ function update_location($fkemprunts_livres){
 			ON emprunts_livres.Livres_fk = Livres.Reference
 			SET Date_rendu = $date_r
 				Etat_actuel = $etat
-			WHERE Id_emprunts = $fkemprunts_livres";
+			WHERE Id_emprunts = $fkEmprunts_livres";
 	$res = mysqli_query ($bd , $sql) or bd_erreur($bd , $sql);
 	mysqli_close($bd);
 }
@@ -99,8 +99,8 @@ function getReservationById($fkemprunts_livres){
 			Etat_actuel
 			FROM emprunts_livres 
 				INNER JOIN livres
-					ON emprunts_livres.Livres_fk = Livres.Reference;
-			WHERE Id_emprunt = $fkemprunts_livres";
+					ON emprunts_livres.Livres_fk = Livres.Reference
+			WHERE Id_emprunt = $fkEmprunts_livres";
 	$res = mysqli_query($bd, $sql) or bd_erreur($bd, $sql);
 	$liv = mysqli_fetch_assoc($res);
 	mysqli_close($bd);
